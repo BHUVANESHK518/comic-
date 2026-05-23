@@ -1,744 +1,2742 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Corner Strike</title>
-  <meta name="description" content="A cinematic interactive football comic story following Leo and Sam through eight emotional chapters." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>The Corner Strike - Printable A4 Comic</title>
+  <meta
+    name="description"
+    content="The Corner Strike is a printable A4 football comic with four pages per chapter, custom illustrated panels, and on-screen chapter navigation."
+  />
   <style>
-    :root, [data-theme="light"] {
-      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
-      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
-      --space-1: 0.25rem;
-      --space-2: 0.5rem;
-      --space-3: 0.75rem;
-      --space-4: 1rem;
-      --space-5: 1.25rem;
-      --space-6: 1.5rem;
-      --space-8: 2rem;
-      --radius-md: 0.75rem;
-      --radius-lg: 1rem;
-      --radius-xl: 1.5rem;
-      --radius-full: 9999px;
-      --sidebar-w: 290px;
-      --color-bg: #0b0f18;
-      --color-surface: #121827;
-      --color-border: rgba(255,255,255,0.1);
-      --color-text: #eef3ff;
-      --color-text-muted: #9ca6c2;
-      --color-primary: #53e6da;
-      --color-secondary: #ffd447;
-      --color-accent: #ff7c58;
-      --shadow-sm: 0 8px 30px rgba(0,0,0,0.3);
-      --shadow-lg: 0 35px 90px rgba(0,0,0,0.45);
-      --font-display: 'Cinzel', Georgia, serif;
-      --font-body: 'Inter', system-ui, sans-serif;
+    :root {
+      --ink: #121212;
+      --paper: #fffaf0;
+      --cream: #fff2c7;
+      --gold: #ffd44f;
+      --sky: #79d8ff;
+      --mint: #59efc8;
+      --accent: #ff6038;
+      --muted: #5f5648;
+      --sidebar-w: 320px;
+      --radius: 22px;
+      --shadow-card: 6px 6px 0 var(--ink);
+      --shadow-lift: 10px 10px 0 var(--ink);
+      --display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --body: "Trebuchet MS", "Segoe UI", sans-serif;
+      --text-xs: clamp(0.76rem, 0.72rem + 0.2vw, 0.9rem);
+      --text-sm: clamp(0.92rem, 0.88rem + 0.18vw, 1rem);
+      --text-base: clamp(1rem, 0.96rem + 0.24vw, 1.08rem);
+      --text-lg: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+      --text-xl: clamp(1.8rem, 1.45rem + 1vw, 2.45rem);
+      --text-2xl: clamp(2.5rem, 2rem + 2vw, 4rem);
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family:var(--font-body);
-      color:var(--color-text);
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: var(--body);
+      color: var(--ink);
       background:
-        radial-gradient(circle at 15% 20%, rgba(83,230,218,0.14), transparent 25%),
-        radial-gradient(circle at 85% 15%, rgba(255,212,71,0.12), transparent 22%),
-        radial-gradient(circle at 50% 100%, rgba(255,124,88,0.1), transparent 28%),
-        linear-gradient(180deg, #0b1220 0%, #070a11 100%);
-      overflow-x:hidden;
-    }
-    .stars,.gridlines,.rain{position:fixed;inset:0;pointer-events:none}
-    .stars{z-index:0;overflow:hidden}
-    .stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:white;opacity:.65;animation:rise linear infinite}
-    .gridlines{z-index:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom, transparent, black 10%, black 85%, transparent)}
-    .rain{z-index:0;opacity:.18;background:linear-gradient(transparent 0%, rgba(83,230,218,0.2) 50%, transparent 100%);transform:skewX(-18deg);animation:drift 9s linear infinite}
-    @keyframes rise{from{transform:translateY(110vh) scale(.7)}to{transform:translateY(-10vh) scale(1.35)}}
-    @keyframes drift{from{transform:translateX(-15%) skewX(-18deg)}to{transform:translateX(15%) skewX(-18deg)}}
-
-    .app{
-      position:relative;
-      z-index:1;
-      display:grid;
-      grid-template-columns:var(--sidebar-w) 1fr;
-      min-height:100vh;
+        radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.5), transparent 14%),
+        radial-gradient(circle at 82% 13%, rgba(255, 224, 98, 0.65), transparent 18%),
+        linear-gradient(135deg, #67d2ff 0%, #85f2df 42%, #ffe58b 100%);
     }
 
-    .sidebar{
-      position:sticky;
-      top:0;
-      height:100vh;
-      padding:var(--space-5);
-      border-right:1px solid var(--color-border);
-      background:rgba(12,18,32,0.78);
-      backdrop-filter:blur(16px);
-      box-shadow:var(--shadow-sm);
-      overflow:auto;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:var(--space-4);
-      padding-bottom:var(--space-5);
-      margin-bottom:var(--space-5);
-      border-bottom:1px solid var(--color-border);
-    }
-    .logo{
-      width:54px;height:54px;border-radius:18px;display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(83,230,218,.16), rgba(255,124,88,.18));
-      border:1px solid rgba(255,255,255,.12);color:var(--color-primary)
-    }
-    .brand-text strong{
-      display:block;
-      font-family:var(--font-display);
-      font-size:var(--text-lg);
-      letter-spacing:.06em;
-      text-transform:uppercase;
-    }
-    .brand-text span{
-      color:var(--color-text-muted);
-      font-size:var(--text-xs);
-      letter-spacing:.18em;
-      text-transform:uppercase;
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .side-actions{
-      display:flex;
-      gap:var(--space-3);
-      margin-bottom:var(--space-4);
-    }
-    .icon-btn{
-      flex:1;
-      border:none;
-      border-radius:18px;
-      padding:0.9rem 1rem;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:.65rem;
-      background:rgba(255,255,255,0.05);
-      color:var(--color-text);
-      cursor:pointer;
-      border:1px solid var(--color-border);
-    }
-    .icon-btn:hover{transform:translateY(-2px)}
-    .search-box{
-      display:none;
-      margin-bottom:var(--space-4);
-    }
-    .search-box.open{display:block}
-    .search-box input{
-      width:100%;
-      padding:0.9rem 1rem;
-      border-radius:16px;
-      border:1px solid var(--color-border);
-      background:rgba(255,255,255,0.05);
-      color:var(--color-text);
-      outline:none;
-    }
-    .search-box input::placeholder{color:var(--color-text-muted)}
-
-    .menu-label{
-      font-size:var(--text-xs);
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:var(--color-text-muted);
-      margin:1rem 0 .75rem;
+    body::before {
+      background-image: radial-gradient(rgba(18, 18, 18, 0.13) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: 0.22;
     }
 
-    .nav-list{
-      display:grid;
-      gap:.75rem;
-    }
-    .chapter-chip{
-      width:100%;
-      border:1px solid var(--color-border);
-      background:rgba(255,255,255,0.03);
-      color:var(--color-text-muted);
-      border-radius:18px;
-      padding:1rem;
-      text-align:left;
-      cursor:pointer;
-    }
-    .chapter-chip strong{
-      display:block;
-      font-size:var(--text-sm);
-      color:inherit;
-      margin-bottom:.25rem;
-    }
-    .chapter-chip span{
-      font-size:var(--text-xs);
-      letter-spacing:.1em;
-      text-transform:uppercase;
-    }
-    .chapter-chip.active{
-      background:rgba(83,230,218,0.12);
-      border-color:rgba(83,230,218,0.35);
-      color:var(--color-text);
+    body::after {
+      background:
+        linear-gradient(120deg, transparent 0 43%, rgba(255, 255, 255, 0.14) 43% 46%, transparent 46% 100%),
+        linear-gradient(155deg, transparent 0 52%, rgba(18, 18, 18, 0.05) 52% 54%, transparent 54% 100%);
+      opacity: 0.7;
     }
 
-    .sidebar-footer{
-      margin-top:var(--space-6);
-      padding-top:var(--space-5);
-      border-top:1px solid var(--color-border);
-    }
-    .sidebar-footer small{
-      display:block;
-      color:var(--color-text-muted);
-      line-height:1.7;
+    img {
+      display: block;
+      max-width: 100%;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
-    .main{
-      padding:var(--space-6);
-      min-width:0;
+    button,
+    input {
+      font: inherit;
     }
 
-    .story-panel{
-      border:1px solid var(--color-border);
-      background:rgba(18,24,39,0.78);
-      backdrop-filter:blur(10px);
-      box-shadow:var(--shadow-lg);
-      border-radius:32px;
-      padding:var(--space-6);
-      display:flex;
-      flex-direction:column;
-      gap:var(--space-5);
-      position:relative;
-      overflow:hidden;
-      min-height:calc(100vh - 3rem);
-    }
-    .story-panel::before{
-      content:"";
-      position:absolute;
-      top:-60px;
-      right:-60px;
-      width:200px;
-      height:200px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(255,212,71,.16), transparent 70%);
-    }
-    .eyebrow{
-      font-size:var(--text-xs);
-      letter-spacing:.24em;
-      text-transform:uppercase;
-      color:var(--color-primary);
-    }
-    h1{
-      font-family:var(--font-display);
-      font-size:var(--text-2xl);
-      line-height:1.04;
-      text-transform:uppercase;
-      max-width:10ch;
-    }
-    .lede{
-      color:var(--color-text-muted);
-      line-height:1.8;
-      max-width:58ch;
+    .app {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+      min-height: 100vh;
     }
 
-    .character-card{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:var(--space-4);
-    }
-    .character{
-      padding:var(--space-4);
-      border-radius:22px;
-      background:rgba(255,255,255,0.04);
-      border:1px solid var(--color-border);
-      display:grid;
-      gap:.5rem;
-      min-height:140px;
-    }
-    .character small{
-      font-size:var(--text-xs);
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--color-secondary);
-    }
-    .character strong{font-size:var(--text-base)}
-    .character p{
-      font-size:var(--text-sm);
-      line-height:1.65;
-      color:var(--color-text-muted);
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 1.25rem;
+      background:
+        linear-gradient(180deg, rgba(255, 248, 217, 0.97), rgba(255, 226, 117, 0.93)),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(18, 18, 18, 0.04) 0 10px,
+          rgba(255, 255, 255, 0.05) 10px 20px
+        );
+      border-right: 4px solid var(--ink);
+      box-shadow: var(--shadow-lift);
     }
 
-    .chapter-head{
-      display:flex;
-      justify-content:space-between;
-      gap:var(--space-4);
-      align-items:end;
-    }
-    .chapter-head .label{
-      font-size:var(--text-xs);
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:var(--color-accent);
-    }
-    .chapter-head h2{
-      font-family:var(--font-display);
-      font-size:var(--text-xl);
-      line-height:1.08;
-      text-transform:uppercase;
-    }
-    .chapter-number{
-      font-family:var(--font-display);
-      font-size:clamp(3rem,2rem + 4vw,6rem);
-      line-height:1;
-      color:rgba(255,255,255,0.08);
+    .sidebar-grid {
+      display: grid;
+      gap: 1rem;
     }
 
-    .story-copy{
-      min-height:290px;
-      padding:var(--space-5);
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
-      overflow:auto;
-    }
-    .story-copy p{
-      line-height:1.92;
-      color:#dce4fb;
-      margin-bottom:1rem;
+    .brand,
+    .search-box,
+    .chapter-box,
+    .controls-box,
+    .sidebar-note {
+      background: rgba(255, 255, 255, 0.82);
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      box-shadow: var(--shadow-card);
     }
 
-    .emotion-row{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:var(--space-4);
-    }
-    .mini-card{
-      padding:var(--space-4);
-      border-radius:22px;
-      background:rgba(255,255,255,0.04);
-      border:1px solid var(--color-border);
-      display:grid;
-      gap:.6rem;
-    }
-    .mini-card span{
-      font-size:var(--text-xs);
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:var(--color-secondary);
-    }
-    .mini-card p{
-      font-size:var(--text-sm);
-      line-height:1.72;
-      color:var(--color-text-muted);
+    .brand {
+      padding: 1.1rem;
     }
 
-    .progress-wrap{display:grid;gap:var(--space-3)}
-    .progress-top{
-      display:flex;
-      justify-content:space-between;
-      gap:var(--space-4);
-      font-size:var(--text-xs);
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--color-text-muted);
-    }
-    .progress-track{
-      height:12px;
-      border-radius:var(--radius-full);
-      background:rgba(255,255,255,0.08);
-      overflow:hidden;
-    }
-    .progress-bar{
-      height:100%;
-      width:0;
-      background:linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
-      transition:width .6s ease;
+    .brand-row {
+      display: flex;
+      gap: 0.95rem;
+      align-items: center;
     }
 
-    .controls{
-      display:flex;
-      flex-wrap:wrap;
-      gap:var(--space-3);
-    }
-    .btn{
-      padding:1rem 1.2rem;
-      border-radius:18px;
-      min-height:52px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.6rem;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-weight:700;
-      cursor:pointer;
-    }
-    .btn.secondary{
-      background:transparent;
-      border:1px solid rgba(83,230,218,.45);
-      color:var(--color-primary);
-    }
-    .btn.primary{
-      background:linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-      color:#081019;
-    }
-    .btn.ghost{
-      background:rgba(255,255,255,0.05);
-      border:1px solid var(--color-border);
-      color:var(--color-text);
-    }
-    .btn:hover{transform:translateY(-2px)}
-
-    .footer-note{
-      padding:var(--space-4) var(--space-2) 0;
-      color:var(--color-text-muted);
-      font-size:var(--text-sm);
-      text-align:center;
+    .logo {
+      width: 78px;
+      height: 78px;
+      border: 3px solid var(--ink);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #81ddff, #ff7d4b);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
     }
 
-    .fade-up{animation:fadeUp .7s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .brand small,
+    .chapter-chip strong,
+    .chapter-chip span,
+    .panel-tag,
+    .speech-label,
+    .meta-label,
+    .paper-id,
+    .progress-row,
+    .action-btn,
+    .control-btn,
+    .search-box label,
+    .chapter-label {
+      font-family: var(--display);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
 
-    @media (max-width: 1080px){
-      .app{grid-template-columns:1fr}
-      .sidebar{
-        position:relative;
-        height:auto;
-        border-right:none;
-        border-bottom:1px solid var(--color-border);
+    .brand small {
+      display: inline-block;
+      margin-bottom: 0.35rem;
+      padding: 0.18rem 0.45rem;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--gold);
+      font-size: 0.7rem;
+      transform: rotate(-3deg);
+    }
+
+    .brand h1,
+    .paper-title,
+    .page-number,
+    .burst {
+      font-family: var(--display);
+    }
+
+    .brand h1 {
+      font-size: 2.35rem;
+      line-height: 0.9;
+      margin-bottom: 0.35rem;
+    }
+
+    .brand p,
+    .sidebar-note,
+    .chapter-chip span,
+    .hook,
+    .script-copy p,
+    .meta-card p,
+    .speech p,
+    .caption-box p {
+      color: var(--muted);
+      line-height: 1.62;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+    }
+
+    .action-btn,
+    .control-btn,
+    .chapter-chip {
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      background: white;
+      box-shadow: 5px 5px 0 var(--ink);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .action-btn:hover,
+    .control-btn:hover,
+    .chapter-chip:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+
+    .action-btn,
+    .control-btn {
+      padding: 0.9rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
+    .search-box {
+      display: none;
+      padding: 1rem;
+    }
+
+    .search-box.open {
+      display: block;
+    }
+
+    .search-box label {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 0.78rem;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: white;
+      outline: none;
+    }
+
+    .chapter-box {
+      padding: 1rem;
+    }
+
+    .chapter-label {
+      font-size: 0.78rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .chapter-list {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .chapter-chip {
+      padding: 0.92rem;
+      text-align: left;
+    }
+
+    .chapter-chip strong {
+      display: block;
+      font-size: 0.82rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .chapter-chip span {
+      display: block;
+      font-size: 0.68rem;
+    }
+
+    .chapter-chip.active {
+      background: linear-gradient(135deg, var(--gold), white);
+      transform: rotate(-1deg);
+    }
+
+    .controls-box {
+      padding: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .controls-box .control-stack {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .control-btn.active {
+      background: var(--mint);
+    }
+
+    .sidebar-note {
+      padding: 1rem;
+      font-size: var(--text-sm);
+    }
+
+    .empty-state {
+      padding: 1rem;
+      border: 3px dashed var(--ink);
+      border-radius: 18px;
+      background: #fff6cb;
+      color: var(--muted);
+      text-align: center;
+      font-size: var(--text-sm);
+    }
+
+    .main {
+      padding: 1.25rem;
+    }
+
+    .chapters {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .chapter-block.hidden {
+      display: none;
+    }
+
+    .chapter-intro {
+      width: min(210mm, 100%);
+      margin: 0 auto 0.8rem;
+      padding: 1rem 1.1rem;
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow-card);
+    }
+
+    .chapter-intro h2 {
+      font-family: var(--display);
+      font-size: var(--text-xl);
+      line-height: 0.95;
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+
+    .chapter-intro p {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 68ch;
+    }
+
+    .chapter-pages {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .comic-paper {
+      --page-accent: #ff6038;
+      --page-secondary: #ffd44f;
+      --page-tint: rgba(255, 96, 56, 0.16);
+      --page-glow: rgba(121, 216, 255, 0.22);
+      width: min(210mm, 100%);
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 6mm;
+      border: 4px solid var(--ink);
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+      display: grid;
+      grid-template-rows: auto 74mm 50mm 1fr;
+      gap: 3mm;
+      scroll-margin-top: 1rem;
+    }
+
+    .paper-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 3mm;
+    }
+
+    .head-copy {
+      min-width: 0;
+    }
+
+    .paper-id {
+      display: inline-block;
+      margin-bottom: 1mm;
+      color: var(--page-accent);
+      font-size: 0.76rem;
+    }
+
+    .paper-title {
+      font-size: 1.38rem;
+      line-height: 0.94;
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    .hook {
+      max-width: 60ch;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .burst {
+      min-width: 28mm;
+      min-height: 26mm;
+      padding: 3mm;
+      display: grid;
+      place-items: center;
+      background: var(--page-secondary);
+      border: 3px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      font-size: 1.2rem;
+      line-height: 1;
+      text-align: center;
+      clip-path: polygon(
+        50% 0%,
+        61% 17%,
+        83% 3%,
+        77% 28%,
+        100% 31%,
+        82% 48%,
+        97% 69%,
+        72% 69%,
+        76% 100%,
+        50% 81%,
+        24% 100%,
+        28% 69%,
+        2% 69%,
+        19% 48%,
+        0% 31%,
+        23% 28%,
+        17% 3%,
+        39% 17%
+      );
+    }
+
+    .hero-panel,
+    .mid-panel,
+    .script-panel,
+    .notes-panel {
+      position: relative;
+      overflow: hidden;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: var(--paper);
+    }
+
+    .hero-panel::before,
+    .mid-panel::before,
+    .script-panel::before,
+    .notes-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(18, 18, 18, 0.08) 1px, transparent 1px);
+      background-size: 13px 13px;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .hero-panel,
+    .mid-panel {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 40%),
+        linear-gradient(135deg, var(--page-tint), transparent 54%, var(--page-glow));
+      isolation: isolate;
+    }
+
+    .hero-panel {
+      height: 74mm;
+    }
+
+    .mid-panel {
+      height: 50mm;
+    }
+
+    .hero-panel img,
+    .mid-panel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .panel-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(18, 18, 18, 0.02), rgba(18, 18, 18, 0.48)),
+        linear-gradient(135deg, var(--page-tint), transparent 50%, var(--page-glow));
+      z-index: 1;
+    }
+
+    .panel-copy {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding: 3mm;
+    }
+
+    .panel-tag,
+    .stamp {
+      align-self: flex-start;
+      padding: 1.4mm 3mm;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: white;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-size: 0.58rem;
+    }
+
+    .stamp {
+      align-self: end;
+      background: var(--page-secondary);
+      transform: rotate(4deg);
+      text-align: center;
+    }
+
+    .stamp strong {
+      display: block;
+      font-family: var(--display);
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .stamp span {
+      display: block;
+      font-size: 0.54rem;
+      text-transform: uppercase;
+    }
+
+    .hero-title,
+    .mid-title {
+      max-width: 11ch;
+      font-family: var(--display);
+      text-transform: uppercase;
+      line-height: 0.95;
+      color: white;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.56);
+    }
+
+    .hero-title {
+      font-size: 1.45rem;
+    }
+
+    .mid-title {
+      font-size: 0.98rem;
+    }
+
+    .caption-box {
+      max-width: 26ch;
+      padding: 2mm 2.5mm;
+      background: rgba(255, 255, 255, 0.92);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: 0.72rem;
+      line-height: 1.38;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .mid-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 3mm;
+    }
+
+    .speech {
+      position: absolute;
+      z-index: 3;
+      width: min(45mm, 68%);
+      padding: 2.2mm 2.6mm;
+      background: white;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .speech::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      transform: rotate(45deg);
+    }
+
+    .left-top {
+      top: 4mm;
+      left: 4mm;
+    }
+
+    .left-top::after {
+      left: 20px;
+      bottom: -7px;
+    }
+
+    .right-top {
+      top: 4mm;
+      right: 4mm;
+    }
+
+    .right-top::after {
+      right: 20px;
+      bottom: -7px;
+    }
+
+    .left-bottom {
+      left: 4mm;
+      bottom: 4mm;
+    }
+
+    .left-bottom::after {
+      left: 18px;
+      top: -7px;
+      transform: rotate(225deg);
+    }
+
+    .right-bottom {
+      right: 4mm;
+      bottom: 4mm;
+    }
+
+    .right-bottom::after {
+      right: 18px;
+      top: -7px;
+      transform: rotate(225deg);
+    }
+
+    .center-top {
+      top: 4mm;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .center-top::after {
+      left: calc(50% - 6px);
+      bottom: -7px;
+    }
+
+    .speech-label {
+      display: inline-block;
+      margin-bottom: 0.6mm;
+      font-size: 0.54rem;
+      color: var(--page-accent);
+    }
+
+    .speech p {
+      font-size: 0.68rem;
+      line-height: 1.28;
+    }
+
+    .bottom-wrap {
+      display: grid;
+      grid-template-columns: 1.28fr 0.72fr;
+      gap: 3mm;
+      min-height: 0;
+    }
+
+    .script-panel,
+    .notes-panel {
+      padding: 3mm;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 225, 0.98));
+    }
+
+    .script-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 3mm;
+      align-items: start;
+      margin-bottom: 2mm;
+    }
+
+    .script-top h3 {
+      max-width: 18ch;
+      font-family: var(--display);
+      font-size: 1.02rem;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .page-number {
+      color: white;
+      -webkit-text-stroke: 2px var(--ink);
+      text-shadow: 4px 4px 0 var(--page-accent);
+      font-size: 2.15rem;
+      line-height: 1;
+    }
+
+    .bubble-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2mm;
+      margin-bottom: 2mm;
+    }
+
+    .bubble-card,
+    .meta-card {
+      position: relative;
+      padding: 2.4mm 2.6mm;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: white;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .bubble-card::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 20px;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      transform: rotate(45deg);
+    }
+
+    .bubble-card.alt::after {
+      left: auto;
+      right: 20px;
+    }
+
+    .bubble-card p,
+    .meta-card p {
+      font-size: 0.72rem;
+      line-height: 1.38;
+    }
+
+    .story-sequence {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 2mm;
+    }
+
+    .story-strip {
+      display: grid;
+      grid-template-columns: 22mm minmax(0, 1fr);
+      gap: 2mm;
+      align-items: stretch;
+    }
+
+    .story-thumb {
+      position: relative;
+      overflow: hidden;
+      min-height: 20mm;
+      height: 20mm;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 40%),
+        linear-gradient(135deg, var(--page-tint), transparent 52%, var(--page-glow));
+      box-shadow: 3px 3px 0 var(--ink);
+      isolation: isolate;
+    }
+
+    .story-thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .story-thumb::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(18, 18, 18, 0.06), rgba(18, 18, 18, 0.36)),
+        linear-gradient(135deg, var(--page-tint), transparent 50%, var(--page-glow));
+      z-index: 1;
+    }
+
+    .story-copy-card {
+      position: relative;
+      padding: 2mm 2.5mm;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: white;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .story-copy-card::after {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 14px;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-left: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      transform: rotate(45deg);
+    }
+
+    .beat-tag {
+      display: inline-block;
+      margin-bottom: 0.5mm;
+      padding: 0.5mm 1.6mm;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--page-secondary);
+      box-shadow: 2px 2px 0 var(--ink);
+      font-family: var(--display);
+      font-size: 0.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .story-copy-card p {
+      font-size: 0.64rem;
+      line-height: 1.28;
+      color: var(--muted);
+    }
+
+    .notes-panel {
+      display: grid;
+      gap: 2mm;
+      align-content: start;
+    }
+
+    .meta-card.note {
+      background: #fff4be;
+    }
+
+    .meta-label {
+      display: inline-block;
+      margin-bottom: 0.6mm;
+      font-size: 0.56rem;
+      color: var(--page-accent);
+    }
+
+    .progress-track {
+      height: 10px;
+      margin-top: 1mm;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: white;
+      overflow: hidden;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background:
+        linear-gradient(90deg, var(--page-accent), var(--page-secondary)),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(255, 255, 255, 0.3) 0 8px,
+          rgba(255, 255, 255, 0.05) 8px 16px
+        );
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.58rem;
+    }
+
+    .page-enter {
+      animation: pageEnter 0.45s ease;
+    }
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.985);
       }
-      .character-card,.emotion-row{grid-template-columns:1fr}
-      .chapter-head{align-items:flex-start}
-      h1{max-width:100%}
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
-    @media (max-width: 760px){
-      .main{padding:var(--space-4)}
-      .story-panel{border-radius:24px;padding:var(--space-4)}
-      .controls{flex-direction:column}
-      .btn,.theme-toggle,.jump-btn,.icon-btn{width:100%}
+
+    @media (max-width: 1180px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 4px solid var(--ink);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .main,
+      .sidebar {
+        padding: 1rem;
+      }
+
+      .comic-paper {
+        min-height: auto;
+        width: 100%;
+        padding: 1rem;
+        grid-template-rows: auto auto auto auto;
+      }
+
+      .mid-wrap,
+      .bottom-wrap,
+      .bubble-row,
+      .action-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-wrap,
+      .mid-wrap {
+        gap: 1rem;
+      }
+
+      .story-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .story-thumb {
+        min-height: 180px;
+      }
+
+      .story-copy-card::after {
+        left: 20px;
+        top: -7px;
+        border-left: none;
+        border-bottom: none;
+        border-right: 2px solid var(--ink);
+        border-top: 2px solid var(--ink);
+      }
+
+      .hero-panel,
+      .mid-panel {
+        min-height: 260px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      html,
+      body {
+        background: white !important;
+      }
+
+      body::before,
+      body::after,
+      .sidebar,
+      .chapter-intro {
+        display: none !important;
+      }
+
+      .app,
+      .main,
+      .chapters,
+      .chapter-pages {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .chapter-block,
+      .comic-paper {
+        break-inside: avoid;
+      }
+
+      .comic-paper {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+      }
+
+      body,
+      .comic-paper,
+      .hero-panel,
+      .mid-panel,
+      .story-thumb,
+      .panel-overlay,
+      .panel-copy,
+      .speech,
+      .caption-box,
+      .stamp,
+      .burst,
+      .bubble-card,
+      .meta-card,
+      .story-copy-card {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .hero-panel,
+      .mid-panel {
+        height: auto;
+      }
+
+      .hero-panel {
+        min-height: 74mm;
+      }
+
+      .mid-panel {
+        min-height: 50mm;
+      }
+
+      .story-thumb {
+        min-height: 20mm;
+        height: 20mm;
+      }
+
+      .hero-panel img,
+      .mid-panel img,
+      .story-thumb img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+      }
+
+      .panel-overlay {
+        display: block !important;
+      }
+
+      .comic-paper:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+
+      .page-enter {
+        animation: none !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="stars" id="stars"></div>
-  <div class="gridlines"></div>
-  <div class="rain"></div>
-
   <div class="app">
     <aside class="sidebar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <svg viewBox="0 0 64 64" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 47L31 13L52 47" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M22 36H42" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
-            <circle cx="32" cy="32" r="5" fill="currentColor"/>
-          </svg>
+      <div class="sidebar-grid">
+        <section class="brand">
+          <div class="brand-row">
+            <div class="logo" aria-hidden="true">
+              <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 47L31 13L52 47" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M22 36H42" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
+                <circle cx="32" cy="32" r="5" fill="currentColor" />
+              </svg>
+            </div>
+            <div>
+              <small>Printable A4 Edition</small>
+              <h1>The Corner Strike</h1>
+              <p>Eight long chapters, four comic pages each, with built-in art and print-friendly A4 layout.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="action-row">
+          <button class="action-btn" id="homeBtn" type="button">Home</button>
+          <button class="action-btn" id="searchToggle" type="button">Search</button>
         </div>
-        <div class="brand-text">
-          <strong>The Corner Strike</strong>
-          <span>Comic story experience</span>
-        </div>
-      </div>
 
-      <div class="side-actions">
-        <button class="icon-btn" id="homeBtn" type="button">⌂ Home</button>
-        <button class="icon-btn" id="searchToggle" type="button">⌕ Search</button>
-      </div>
+        <section class="search-box" id="searchBox">
+          <label for="chapterSearch">Search chapters</label>
+          <input id="chapterSearch" type="text" placeholder="Try storm, grocery, final..." />
+        </section>
 
-      <div class="search-box" id="searchBox">
-        <input type="text" id="chapterSearch" placeholder="Search chapter..." />
-      </div>
+        <section class="chapter-box">
+          <div class="chapter-label">Issue Contents</div>
+          <div class="chapter-list" id="chapterList"></div>
+        </section>
 
-      <div class="menu-label">Chapters</div>
-      <div class="nav-list" id="chapterList"></div>
+        <section class="controls-box">
+          <div class="control-stack">
+            <button class="control-btn" id="prevBtn" type="button">Previous Page</button>
+            <button class="control-btn" id="nextBtn" type="button">Next Page</button>
+            <button class="control-btn" id="autoBtn" type="button">Auto Flip</button>
+            <button class="control-btn" id="printBtn" type="button">Print A4</button>
+          </div>
+        </section>
 
-      <div class="sidebar-footer">
-        <small>
-          Use the sidebar to jump between chapters.
-          Search chapters instantly and return home anytime.
-        </small>
+        <section class="sidebar-note">
+          Each chapter now runs across four pages, so the story reads more like a real comic issue. The print button uses the same pages you see here and formats them for A4 portrait paper.
+        </section>
       </div>
     </aside>
 
-    <main class="main" id="main">
-      <section class="story-panel">
-        <div class="eyebrow" id="miniTitle">Football. Family. Fire.</div>
-        <h1 id="mainTitle">The Winning Goal</h1>
-        <p class="lede">A richer cinematic version of Leo's journey, now with long-form chapter storytelling, visible character profiles, emotional beats, and a more polished magazine-style layout.</p>
-
-        <div class="character-card">
-          <article class="character">
-            <small>Main character</small>
-            <strong>Leo Alvarez</strong>
-            <p>The gifted striker whose dream of a scholarship collides with family responsibility, exhaustion, and a final chance to rewrite his future.</p>
-          </article>
-          <article class="character">
-            <small>Father figure</small>
-            <strong>Sam Alvarez</strong>
-            <p>The owner of Sam's Corner Grocery, a loving father whose quiet sacrifices become the emotional heart of the entire story.</p>
-          </article>
-          <article class="character">
-            <small>Future trigger</small>
-            <strong>Coach Mira &amp; the Scout</strong>
-            <p>The coach keeps believing in Leo, while the university scout becomes the symbol of the larger life waiting just beyond the final whistle.</p>
-          </article>
-        </div>
-
-        <div class="chapter-head fade-up" id="chapterHead">
-          <div>
-            <div class="label" id="subtitleLabel">Chapter theme</div>
-            <h2 id="chapterTitle">The Winning Goal</h2>
-          </div>
-          <div class="chapter-number" id="panelNumber">01</div>
-        </div>
-
-        <article class="story-copy fade-up" id="storyText" aria-live="polite"></article>
-
-        <div class="emotion-row fade-up">
-          <div class="mini-card">
-            <span>Character focus</span>
-            <p id="characterFocus">Leo, Sam, and the entire city move through pressure, love, fear, sacrifice, and hope in a story that feels larger than sport.</p>
-          </div>
-          <div class="mini-card">
-            <span>Chapter pulse</span>
-            <p id="chapterPulse">Victory hangs on seconds, and the bright noise of the stadium makes Leo believe destiny has finally opened a door.</p>
-          </div>
-        </div>
-
-        <div class="progress-wrap">
-          <div class="progress-top">
-            <span id="progressText">Story progress</span>
-            <span id="progressCount">1 / 8</span>
-          </div>
-          <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
-        </div>
-
-        <div class="controls">
-          <button class="btn secondary" id="prevBtn" type="button">◀ Previous</button>
-          <button class="btn primary" id="nextBtn" type="button">Next Chapter ▶</button>
-          <button class="btn ghost" id="autoBtn" type="button">Auto Play</button>
-        </div>
-
-        <p class="footer-note">Use the sidebar chapter list, home, and search buttons to navigate.</p>
-      </section>
+    <main class="main">
+      <div class="chapters" id="chapters"></div>
     </main>
   </div>
 
   <script>
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 95; i++) {
-      const star = document.createElement('span');
-      star.style.left = Math.random() * 100 + 'vw';
-      star.style.top = Math.random() * 100 + 'vh';
-      star.style.animationDuration = (Math.random() * 6 + 6) + 's';
-      star.style.animationDelay = (Math.random() * 6) + 's';
-      star.style.opacity = (Math.random() * 0.7 + 0.15).toFixed(2);
-      starsContainer.appendChild(star);
-    }
-
-    const scenes = [
+    const chapters = [
       {
-        chapter: 'Chapter 1',
-        number: '01',
-        title: 'The Winning Goal',
-        subtitle: 'High energy start',
-        mood: 'High energy start',
-        focus: 'Leo is introduced as fearless, explosive, and hungry for a life bigger than the one he has known.',
-        pulse: 'The night begins with momentum, adrenaline, and a stadium ready to explode.',
-        paragraphs: [
-          'The stadium lights pour down like white fire, bleaching the grass in silver and turning every moving body into a streak of speed and tension. It is the semi-final, the score is locked at 1-1, and the final thirty seconds feel heavier than the whole season that came before. Leo Alvarez can hear everything and nothing at once: the pounding of his own heart, the breath scraping in his chest, the distant chant of students in painted faces, and the sharp whistle of his coach calling for one final run. He has already chased every loose ball, crashed through every challenge, and stretched his legs to the edge of collapse, yet some fierce inner spark still tells him the night belongs to him.',
-          'Then the cross arrives. It hangs above the penalty box with a strange kind of beauty, floating in the floodlights like fate itself has decided to pause. Leo darts left to sell the defender a lie, snaps back into open space, and launches upward with perfect timing. In that airborne instant, the whole stadium seems to freeze; the goalkeeper extends, the crowd rises, and Leo meets the ball with a powerful header that sends it knifing toward the far side of the net. Fingers reach, but not far enough. The net snaps. The whistle blasts. The world erupts.',
-          'Teammates crash into him in a blur of shouting, laughter, and disbelief. They lift him onto their shoulders while the stands quake under the thunder of celebration, and Leo stares into the sea of faces with his fists raised to the sky. For one golden stretch of seconds, every dream he has carried in silence feels real: college football, packed arenas, scouts, scholarships, and a future bright enough to rescue both himself and his father.'
+        chapter: "Chapter 1",
+        number: "01",
+        title: "The Winning Goal",
+        subtitle: "High energy start",
+        summary: "The match opens at fever pitch, and Leo learns what it feels like when a city suddenly believes your future might be real.",
+        accent: "#ff6038",
+        secondary: "#ffd44f",
+        tint: "rgba(255, 96, 56, 0.16)",
+        glow: "rgba(121, 216, 255, 0.22)",
+        pages: [
+          {
+            title: "Match Point",
+            hook: "Thirty seconds remain, and every sprint suddenly feels heavier than the whole season that came before it.",
+            burst: "BOOM!",
+            stamp: "Semi-Final Heat",
+            heroType: "stadium-win",
+            leftType: "stadium-run",
+            rightType: "goal-celebration",
+            heroTitle: "The Night Narrows to One Run",
+            heroCaption: "Floodlights bleach the field into silver and make every heartbeat feel loud enough to hear.",
+            leftTitle: "Final Run",
+            leftCaption: "Coach Mira points toward the last open lane and trusts Leo to find it before the whistle does.",
+            rightTitle: "Impact",
+            rightCaption: "The winning header lands like a spark in dry grass and the whole stadium catches fire.",
+            heroBubble: { label: "Leo", text: "One clean touch. That's all I need.", pos: "right-top" },
+            leftBubble: { label: "Coach", text: "Go now, Leo!", pos: "left-top" },
+            rightBubble: { label: "Crowd", text: "GOAL!", pos: "left-bottom" },
+            dialogueOne: "The defenders are tired, but Leo is past tired. He is in that strange place where the body shakes and the dream keeps running anyway.",
+            dialogueTwo: "When the cross rises, time does what it only seems to do in stories: it slows down long enough for destiny to show its face.",
+            focus: "Leo is introduced as fearless, explosive, and hungry for a life larger than the one he has always known.",
+            pulse: "Adrenaline, noise, and belief flood every panel.",
+            paragraphs: [
+              "The stadium lights pour down like white fire, flattening the grass into bright silver and throwing long shadows behind every sprinting player. The score is tied and the crowd has become one shaking wall of sound.",
+              "Leo hears the whistle from the sideline, sees the wing open for a heartbeat, and commits before his legs can complain. He has chased every loose ball all night, but this last run feels different, as if the field itself is bending toward him.",
+              "Then the cross arrives. He sells the defender one step to the left, snaps back into space, and launches upward with the kind of timing players spend years chasing.",
+              "The ball leaves his forehead with a crack of certainty. The net snaps. The whistle erupts. For one impossible second, Leo feels as if the future has finally leaned in close enough to whisper his name."
+            ]
+          },
+          {
+            title: "After the Whistle",
+            hook: "Victory turns the stadium into a storm of hands, shoulders, chants, and sudden promises.",
+            burst: "WHAM!",
+            stamp: "Hero Lift",
+            heroType: "goal-celebration",
+            leftType: "crowd-wave",
+            rightType: "spotlight-player",
+            heroTitle: "The Whole Field Wants a Piece of Him",
+            heroCaption: "Teammates crash into Leo before he can even land properly, and the crowd answers with thunder.",
+            leftTitle: "The Stands Roar Back",
+            leftCaption: "Painted faces and school banners turn into a living wall of celebration.",
+            rightTitle: "A New Kind of Light",
+            rightCaption: "For the first time, Leo can imagine scouts, colleges, and futures that used to feel too far away to say out loud.",
+            heroBubble: { label: "Teammate", text: "You did it! You actually did it!", pos: "left-top" },
+            leftBubble: { label: "Students", text: "LEO! LEO! LEO!", pos: "center-top" },
+            rightBubble: { label: "Leo", text: "This can't be the end of the story. It has to be the start.", pos: "right-bottom" },
+            dialogueOne: "The chant of his name feels unreal, like something borrowed from another life and dropped onto this field by mistake.",
+            dialogueTwo: "But once it starts, Leo cannot stop himself from believing it. Not fully. Not anymore.",
+            focus: "Leo's private dream becomes briefly public, visible, and almost reachable.",
+            pulse: "The page stretches triumph as far as it can before reality returns.",
+            paragraphs: [
+              "Hands grab his shoulders from every angle. Teammates jump onto his back, wrap him in sweat and shouting, and nearly drag him off his feet again in the chaos of celebration.",
+              "From above the field, the student section moves like one living thing. Homemade banners shake, painted faces blur into streaks of color, and the chant of Leo's name pushes out against the night air.",
+              "While he raises both fists and tries not to cry in front of everyone, a different thought begins to pulse underneath the noise. If one goal can make a stadium believe in him, maybe it can make a university believe in him too.",
+              "That idea settles into him with dangerous brightness. It is not just glory he wants now. It is a way out, a scholarship, a future big enough to pull his father into the light beside him."
+            ]
+          },
+          {
+            title: "Dreams in Motion",
+            hook: "On the walk home, celebration fades into the quieter, more fragile space where ambition turns into hope.",
+            burst: "ZIP!",
+            stamp: "Road Home",
+            heroType: "city-walk",
+            leftType: "empty-field",
+            rightType: "trophy-dream",
+            heroTitle: "The City Feels Smaller Tonight",
+            heroCaption: "Streetlights, puddles, and late traffic reflect a version of the future Leo cannot stop replaying.",
+            leftTitle: "The Field Goes Dark",
+            leftCaption: "Even after everyone leaves, the grass still remembers the shape of the winning run.",
+            rightTitle: "What Comes Next?",
+            rightCaption: "In Leo's mind the goal becomes something larger than sport. It becomes a doorway.",
+            heroBubble: { label: "Narration", text: "The walk home is shorter than usual, but Leo's thoughts keep outrunning his feet.", pos: "left-top" },
+            leftBubble: { label: "Leo", text: "One final. One more chance.", pos: "right-bottom" },
+            rightBubble: { label: "Dream", text: "Scholarship. Stadiums. A bigger life.", pos: "left-bottom" },
+            dialogueOne: "He imagines letters, phone calls, campus visits, and his father smiling in a crowd that does not have to worry about rent.",
+            dialogueTwo: "For a few blocks, the dream is so vivid it almost feels like memory instead of fantasy.",
+            focus: "Leo's ambition expands from winning matches to changing both his life and Sam's.",
+            pulse: "The page softens from noise to possibility.",
+            paragraphs: [
+              "By the time Leo leaves the stadium, the night has cooled and the roar behind him has become an echo. The city still feels charged, but now the electricity is living inside his chest instead of around him.",
+              "He passes shuttered storefronts, glowing windows, and buses rattling through yellow pools of light. Everywhere he looks, he projects a future onto the glass: one where the winning goal was only the first chapter in something enormous.",
+              "He imagines university colors on his back, buses replaced by team flights, and his father standing in cleaner clothes, laughing in a place where nobody is choosing between groceries and bills.",
+              "The dream is almost too bright to hold, which is exactly why he protects it so fiercely. For Leo, imagining a bigger life has never been a hobby. It has always been survival."
+            ]
+          },
+          {
+            title: "The Door Opens",
+            hook: "Before the next chapter begins, the comic lets hope stretch to its fullest possible shape.",
+            burst: "FLASH!",
+            stamp: "Hope Peak",
+            heroType: "spotlight-player",
+            leftType: "hallway-hype",
+            rightType: "scout-office",
+            heroTitle: "Tomorrow Suddenly Matters More",
+            heroCaption: "Leo falls asleep with stadium lights still burning behind his eyelids.",
+            leftTitle: "School Will Talk",
+            leftCaption: "By morning, the goal will belong to everybody, not just to him.",
+            rightTitle: "Opportunity Waiting",
+            rightCaption: "Somewhere, without Leo knowing it yet, a scout is already making notes.",
+            heroBubble: { label: "Leo", text: "If this is the first real chance, I can't waste it.", pos: "right-top" },
+            leftBubble: { label: "Narration", text: "Success always arrives with witnesses.", pos: "left-top" },
+            rightBubble: { label: "Future", text: "One championship game could change everything.", pos: "right-bottom" },
+            dialogueOne: "Hope is dangerous when you do not have much else, but Leo does not know how to live without it.",
+            dialogueTwo: "So he lets himself have one night where the dream is not a whisper. It is a shout.",
+            focus: "The chapter closes at the highest emotional point before family reality cuts back in.",
+            pulse: "Confidence and possibility crest together.",
+            paragraphs: [
+              "At home, sleep comes late. Leo lies awake replaying the header in perfect detail, from the defender's false step to the exact moment the net gave way under the strike.",
+              "Each replay grows into something bigger than a sports memory. It becomes evidence that the world may finally be willing to open for him if he can stay brave enough to keep running at it.",
+              "He does not know yet that tomorrow will bring more than applause. He does not know that his coach will be waiting with a visitor and a folder. He only knows that the final is coming and that, for once, fear feels smaller than hope.",
+              "That is where the first chapter leaves him: staring at the ceiling, the city quiet at last, and the future brighter than it has any right to be."
+            ]
+          }
         ]
       },
       {
-        chapter: 'Chapter 2',
-        number: '02',
-        title: 'The Letter',
-        subtitle: 'Warm family connection',
-        mood: 'Warm family connection',
-        focus: 'Sam becomes more than a side character here; he is loving, proud, playful, and completely devoted to his son.',
-        pulse: 'The noisy stadium gives way to warmth, food, celebration, and family tenderness.',
-        paragraphs: [
-          'When Leo pushes open the glass door of Sam’s Corner Grocery, the sound that greets him is not thunder but a familiar brass chime that has sung above the entrance for years. The air inside carries the scent of cedar shelves, ripe fruit, newspaper ink, and the spice mix Sam sprinkles over the deli sandwiches he makes in the back. Everything about the small store is ordinary in the way only beloved places can be. Behind the counter, in his faded apron and rolled-up sleeves, Sam Alvarez lights up the instant he sees his son, and the exhaustion on Leo’s face melts into laughter before a single word is spoken.',
-          '“There he is!” Sam shouts, rushing around the counter and wrapping Leo in a hug so joyful it nearly lifts him off the floor. He has already turned the front register into a tiny shrine of pride, lining up Leo’s medals beside the chewing gum rack and taping an old newspaper photo from Leo’s first youth tournament beside the receipt printer. Customers from the neighborhood grin and clap as Leo ducks his head in embarrassment, and Sam keeps telling every person in earshot that the winning goal was not luck, not chance, but proof that his boy was built for something extraordinary.',
-          'Later, after the last customer leaves, father and son stand together in the cramped back kitchen making thick turkey sandwiches and pouring cold drinks into paper cups. Sam tosses a crumpled paper towel into the air to recreate the cross, Leo heads it dramatically into a stack of cardboard boxes, and both of them laugh until they cannot breathe.'
+        chapter: "Chapter 2",
+        number: "02",
+        title: "The Letter",
+        subtitle: "Warm family connection",
+        summary: "The comic steps off the field and into Sam's Corner Grocery, where pride, routine, and tenderness make the stakes of the story personal.",
+        accent: "#ff8b2c",
+        secondary: "#ffe27a",
+        tint: "rgba(255, 139, 44, 0.16)",
+        glow: "rgba(255, 222, 122, 0.22)",
+        pages: [
+          {
+            title: "Sam's Corner Grocery",
+            hook: "The door chime rings, and the world narrows from stadium thunder to a little store full of familiar light.",
+            burst: "CLANG!",
+            stamp: "Home Glow",
+            heroType: "store-front",
+            leftType: "grocery-shelves",
+            rightType: "kitchen-hug",
+            heroTitle: "Victory Comes Home",
+            heroCaption: "The grocery is small, but it holds the warmth of a whole neighborhood and all of Leo's childhood.",
+            leftTitle: "Every Shelf Knows Them",
+            leftCaption: "The aisles are packed with snacks, staples, and years of Sam quietly extending credit to people who needed one more day.",
+            rightTitle: "Pride at the Counter",
+            rightCaption: "Sam's face changes the second he sees Leo, as if the whole store suddenly turns brighter from the inside.",
+            heroBubble: { label: "Narration", text: "Back at Sam's Corner Grocery, victory smells like bread, spice, and fluorescent light.", pos: "left-top" },
+            leftBubble: { label: "Customer", text: "There he is! The hero!", pos: "right-top" },
+            rightBubble: { label: "Sam", text: "That's my boy!", pos: "left-bottom" },
+            dialogueOne: "The store has always felt too small to impress anyone and too loved to matter less because of it.",
+            dialogueTwo: "For Leo, there is no place on earth more ordinary or more sacred.",
+            focus: "Sam becomes more than a side character: proud, playful, and deeply devoted to his son.",
+            pulse: "Noise falls away and warmth takes over.",
+            paragraphs: [
+              "When Leo pushes through the grocery door, the brass chime above it sings the same short song it has sung for years. The air carries cedar shelves, newspaper ink, ripe fruit, and the spice mix Sam shakes onto sandwiches in the back.",
+              "Nothing in the store is grand. The freezer hum is too loud, the lights are too white, and the aisles are too narrow. But beloved places do not need elegance to feel important. They only need memory.",
+              "Sam is already coming around the counter before Leo can say a word. He pulls him into a hug that is half celebration and half relief, and for a second Leo forgets the roar of the stadium because this joy feels older and truer.",
+              "Customers clap from the checkout lane. Someone whistles. Somebody else insists Leo reenact the header with a loaf of bread while Sam laughs hard enough to wipe tears from his eyes."
+            ]
+          },
+          {
+            title: "Neighborhood Legend",
+            hook: "Word travels faster than receipts, and Sam has no intention of being quiet about what his son just did.",
+            burst: "YEAH!",
+            stamp: "Proud Dad",
+            heroType: "kitchen-hug",
+            leftType: "store-front",
+            rightType: "grocery-shelves",
+            heroTitle: "Sam Tells the Story Bigger Every Time",
+            heroCaption: "Each customer gets a slightly louder version of the goal and a slightly taller version of Leo.",
+            leftTitle: "Counter Museum",
+            leftCaption: "Old photos, school medals, and newspaper clippings turn the register into a little shrine of family hope.",
+            rightTitle: "Everyone Belongs Here",
+            rightCaption: "The grocery works like a community living room disguised as a store.",
+            heroBubble: { label: "Sam", text: "Luck? No, no. That's talent and courage right there.", pos: "right-top" },
+            leftBubble: { label: "Leo", text: "Dad, you're making it sound like I flew.", pos: "left-bottom" },
+            rightBubble: { label: "Neighbor", text: "Let him brag. We all wanted to.", pos: "right-bottom" },
+            dialogueOne: "Sam has the rare gift of making love sound like public certainty. When he praises Leo, nobody in the room doubts him.",
+            dialogueTwo: "Leo laughs through the embarrassment because underneath it he can feel how badly his father wants this future too.",
+            focus: "The chapter shows how much of Leo's dream has always been shared by Sam.",
+            pulse: "Pride expands from private to communal.",
+            paragraphs: [
+              "Sam keeps replaying the goal for anyone who walks through the door. He points with a plastic spoon, uses a paper bag as the cross, and narrates the jump as if he had been standing inside the box with his son.",
+              "By the time he reaches the part where the net snapped, the goal has grown into a small myth. In Sam's telling, the keeper flew farther, the crowd roared louder, and Leo's timing became something close to magic.",
+              "Behind the register, he lines up medals from older tournaments beside a sun-faded photo from Leo's first youth team. The counter looks half like a business and half like a museum built around one boy's future.",
+              "Leo lets himself bask in it because he knows what he is really seeing. Sam is not only proud of a goal. He is clinging to proof that his son may not be trapped by the same limits that trapped him."
+            ]
+          },
+          {
+            title: "Back Kitchen Replay",
+            hook: "After the last customer leaves, father and son settle into the quiet part of celebration: food, jokes, and the safety of being understood.",
+            burst: "HA!",
+            stamp: "Closing Time",
+            heroType: "kitchen-hug",
+            leftType: "grocery-shelves",
+            rightType: "store-front",
+            heroTitle: "Sandwiches, Soda, and Second Helpings of Joy",
+            heroCaption: "The comic slows down so we can feel how easy laughter comes when the world is not demanding anything yet.",
+            leftTitle: "Ordinary Miracles",
+            leftCaption: "Sam's small rituals make the back room feel like home even more than the apartment ever did.",
+            rightTitle: "A Good Night Held Still",
+            rightCaption: "This is the kind of scene the story will ache for later, which is why it lingers here now.",
+            heroBubble: { label: "Sam", text: "Show me the jump again.", pos: "left-top" },
+            leftBubble: { label: "Leo", text: "Only if you throw the pass right this time.", pos: "right-top" },
+            rightBubble: { label: "Narration", text: "Some memories become precious the second they happen.", pos: "left-bottom" },
+            dialogueOne: "The laughter in the kitchen is loose and tired and honest, the kind that only comes when two people know each other so well they stop trying to perform.",
+            dialogueTwo: "In those minutes, the future is exciting but not urgent. The present is enough.",
+            focus: "Leo and Sam's bond becomes the emotional foundation of the comic.",
+            pulse: "The chapter trades spectacle for tenderness.",
+            paragraphs: [
+              "Later, after the final customer wanders out and the front sign is turned to CLOSED, Sam and Leo retreat to the narrow back kitchen. It smells like bread crust, cut tomatoes, and the faint peppery sting of deli mustard.",
+              "Sam tosses a crumpled paper towel into the air to recreate the cross. Leo heads it across the room into a stack of cardboard boxes, and both of them collapse into laughter so hard they have to lean against the counter.",
+              "They eat thick sandwiches on overturned milk crates, feet aching, shoulders dropped, the adrenaline finally cooling out of Leo's body. Sam listens to every detail of the match as if the story itself were food.",
+              "For a while there is no debt, no pressure, no scout, no final. There is only a father trying to memorize the shape of his son's happiness."
+            ]
+          },
+          {
+            title: "The Quiet Edge of Joy",
+            hook: "Beneath all the warmth, the chapter plants a subtler truth: Sam's pride is huge because the stakes have always been huge too.",
+            burst: "HUMM.",
+            stamp: "Underneath It",
+            heroType: "night-window",
+            leftType: "store-close",
+            rightType: "trophy-dream",
+            heroTitle: "Hope Glows Brightest in Small Rooms",
+            heroCaption: "When the lights dim and the laughter settles, both of them begin imagining what one scholarship could mean.",
+            leftTitle: "Locking Up",
+            leftCaption: "Sam double-checks every latch and every light the way people do when they cannot afford mistakes.",
+            rightTitle: "What Winning Could Buy",
+            rightCaption: "For Leo, the dream is no longer only athletic. It is practical, tender, and painfully specific.",
+            heroBubble: { label: "Leo", text: "If I make it, you come with me. All of it. Every part.", pos: "right-top" },
+            leftBubble: { label: "Sam", text: "One game at a time, kid.", pos: "left-bottom" },
+            rightBubble: { label: "Dream", text: "Tuition. Rent. Relief.", pos: "right-bottom" },
+            dialogueOne: "Joy is easy to celebrate when it has no consequences. This joy matters because it might actually change what tomorrow costs.",
+            dialogueTwo: "That is why both of them guard it so carefully, even while pretending they are just enjoying a good night.",
+            focus: "The chapter closes by tying love directly to the future Leo is chasing.",
+            pulse: "Warmth carries a faint undertone of need.",
+            paragraphs: [
+              "When the store is finally quiet, Sam takes his usual slow walk through the aisles, checking the cooler doors, the register drawer, and the front lock twice. Leo watches him and notices what he always notices too late: how practiced his father's caution has become.",
+              "That same carefulness is inside the way Sam talks about the final. He is thrilled, but even his pride has discipline. He does not want to put too much weight on one game in case hope turns and bruises them both.",
+              "Leo feels the opposite pull. He wants to put weight on it because he can see what success could mean in concrete terms: tuition bills erased, the grocery no longer carrying every family worry by itself, Sam allowed to breathe a little easier.",
+              "The chapter ends with both of them smiling, both of them tired, and both of them already leaning toward a future they do not realize is about to become much more complicated."
+            ]
+          }
         ]
       },
       {
-        chapter: 'Chapter 3',
-        number: '03',
-        title: 'The Scout',
-        subtitle: 'Exciting future dreams',
-        mood: 'Exciting future dreams',
-        focus: 'Leo begins to see a path beyond survival, one defined by talent, discipline, and a scholarship that could change both lives.',
-        pulse: 'The story widens from local success to life-changing possibility.',
-        paragraphs: [
-          'The next afternoon, the hallways at school feel too narrow for the size of Leo’s excitement. Students slap him on the shoulder as he passes, replaying the goal with exaggerated movements, while his teammates grin like the whole campus belongs to them. When the coach’s assistant appears at his classroom door and says the coach needs him immediately, Leo assumes it is another congratulations speech or one more reminder to stay focused for the final. He walks into the office still flushed with confidence, only to stop short when he sees a sharply dressed woman seated across from Coach Mira with a leather folder resting on her knee.',
-          'The logo embossed in silver on the folder belongs to one of the top universities in the region. The woman stands, introduces herself as a collegiate scout, and shakes Leo’s hand with the calm confidence of someone who has met hundreds of talented athletes before. Yet the way she studies him is different; it is careful, almost measuring. She says she watched the semi-final and saw more than a goal. She saw timing under pressure, intelligent movement without the ball, courage in traffic, and the kind of instinct that cannot be taught in a classroom or gym. Then she offers words Leo has imagined hearing for years: if he performs in the championship, a full-ride athletic scholarship could be his.',
-          'The office seems brighter after that sentence. Tuition, housing, training, a real path into the future, all suddenly feel close enough to touch.'
+        chapter: "Chapter 3",
+        number: "03",
+        title: "The Scout",
+        subtitle: "Exciting future dreams",
+        summary: "School corridors, coach's offices, and one poised scout push Leo's dream from fantasy into something measurable and immediate.",
+        accent: "#ff4264",
+        secondary: "#73f0e0",
+        tint: "rgba(255, 66, 100, 0.16)",
+        glow: "rgba(115, 240, 224, 0.2)",
+        pages: [
+          {
+            title: "The Hallway Buzz",
+            hook: "By the next day, the winning goal belongs to the whole school, and Leo is suddenly walking through a version of fame.",
+            burst: "WHAM!",
+            stamp: "Campus Noise",
+            heroType: "hallway-hype",
+            leftType: "spotlight-player",
+            rightType: "crowd-wave",
+            heroTitle: "Everybody Has Seen the Goal",
+            heroCaption: "Shoulder slaps, shouted replays, and exaggerated headers follow Leo down the corridor before first period can even settle.",
+            leftTitle: "Hero by Morning",
+            leftCaption: "The same campus that felt ordinary yesterday suddenly behaves like it belongs to him.",
+            rightTitle: "Replay Culture",
+            rightCaption: "Every person who watched the game has edited it into a bigger story overnight.",
+            heroBubble: { label: "Students", text: "Do the jump again!", pos: "center-top" },
+            leftBubble: { label: "Leo", text: "Okay, okay, not in the hallway.", pos: "right-bottom" },
+            rightBubble: { label: "Narration", text: "Success always arrives louder when it is still new.", pos: "left-top" },
+            dialogueOne: "For once, attention feels less like pressure and more like proof that the work might be worth it.",
+            dialogueTwo: "Leo lets himself enjoy it, but some part of him is already waiting for the next test.",
+            focus: "The goal changes Leo's social gravity and makes the possibility of a bigger future feel public.",
+            pulse: "Excitement climbs fast and stays bright.",
+            paragraphs: [
+              "The next morning, Leo barely makes it ten steps into school before somebody calls his name across the hall. By lunch, he has been stopped by freshmen, teachers, upperclassmen, and classmates he has never spoken to before.",
+              "Everyone wants the story. Everyone claims they knew he was going to score. Everyone reenacts the header with bigger gestures than the last person used, as if the goal itself were already turning into folklore.",
+              "Leo grins through most of it because the joy is real. But underneath the laughter, he can feel another rhythm building, one that has less to do with popularity and more to do with possibility.",
+              "The championship no longer feels like just the last game of the season. It feels like an audition that the entire world has suddenly started paying attention to."
+            ]
+          },
+          {
+            title: "Coach Mira's Office",
+            hook: "One request from the coach's assistant changes the mood from celebration to tension in a single breath.",
+            burst: "STEP.",
+            stamp: "Now Wait",
+            heroType: "coach-office",
+            leftType: "scout-office",
+            rightType: "scholarship-letter",
+            heroTitle: "A Visitor Is Waiting",
+            heroCaption: "Leo expects another congratulations speech, not a stranger with a leather folder and perfectly calm eyes.",
+            leftTitle: "The Measure of Talent",
+            leftCaption: "The scout studies him the way serious people study investments: quietly, directly, and without wasting any time.",
+            rightTitle: "The Folder on the Desk",
+            rightCaption: "Embossed logos and thick paper turn vague dreams into something suddenly administrative and real.",
+            heroBubble: { label: "Assistant", text: "Coach needs you. Right now.", pos: "left-top" },
+            leftBubble: { label: "Scout", text: "You move well under pressure.", pos: "right-top" },
+            rightBubble: { label: "Leo", text: "This is about the final... isn't it?", pos: "left-bottom" },
+            dialogueOne: "The office smells like whiteboard markers, old carpet, and the particular kind of seriousness that makes your shoulders straighten without permission.",
+            dialogueTwo: "Leo is still carrying yesterday's confidence, but now it has something sharper to collide with.",
+            focus: "The page transitions the story from school excitement to life-changing evaluation.",
+            pulse: "The chapter tightens from noise into focus.",
+            paragraphs: [
+              "When the coach's assistant appears at the classroom door, Leo assumes there has been one more interview request or one more speech waiting for him. He walks down the hallway still lit from the previous night's momentum.",
+              "That confidence pauses the second he sees the woman sitting across from Coach Mira. She is older than he expected, dressed simply but sharply, with a leather folder resting closed against one knee.",
+              "She introduces herself as a university scout and shakes his hand like someone who has done this hundreds of times without ever losing the habit of paying close attention. The greeting is warm, but the scrutiny behind it is precise.",
+              "Coach Mira says almost nothing. She does not need to. The room has already changed shape around the fact that Leo is no longer merely being praised. He is being considered."
+            ]
+          },
+          {
+            title: "What She Saw",
+            hook: "The scout describes the goal, but not the way the crowd did. She describes the intelligence inside it.",
+            burst: "CLICK!",
+            stamp: "Seen Clearly",
+            heroType: "scout-office",
+            leftType: "spotlight-player",
+            rightType: "chalkboard-plan",
+            heroTitle: "More Than a Goal",
+            heroCaption: "Timing, movement, courage, spacing, patience. The scout is naming skills Leo has felt but never heard measured aloud before.",
+            leftTitle: "Pressure as Proof",
+            leftCaption: "To the scout, the big moment matters because it reveals habits built long before the whistle.",
+            rightTitle: "The Path Forward",
+            rightCaption: "The championship now carries the weight of a decision that could alter both Leo's future and Sam's.",
+            heroBubble: { label: "Scout", text: "I saw how you moved before the ball ever came near you.", pos: "right-top" },
+            leftBubble: { label: "Coach Mira", text: "I've been telling him that for years.", pos: "left-bottom" },
+            rightBubble: { label: "Leo", text: "So this really depends on Saturday.", pos: "right-bottom" },
+            dialogueOne: "No one has ever spoken about his talent this clinically before, and Leo realizes how hungry he has been for exactly that.",
+            dialogueTwo: "Praise feels good. Evaluation feels dangerous. But evaluation is what opens doors.",
+            focus: "Leo's instinct is reframed as something teachable, valuable, and legible to institutions.",
+            pulse: "Dreams become structured, tangible, and urgent.",
+            paragraphs: [
+              "The scout does not begin with congratulations. She begins with evidence. She talks about Leo's off-ball movement, the decoy step he sold the defender, the patience of his timing, and the courage it takes to attack space when the whole field knows what is at stake.",
+              "She says the goal was impressive, but the sequence before the goal is what matters even more. Anyone can get lucky once. Very few players read a moment that cleanly under real pressure.",
+              "Leo listens as if someone is translating part of himself he has only ever known by feel. All the work that happened in empty training sessions, all the patterns he learned without being able to name them, suddenly sound visible.",
+              "Coach Mira finally smiles, not because she is surprised, but because she has heard these truths in Leo's game for years and now someone else is speaking them aloud."
+            ]
+          },
+          {
+            title: "The Offer",
+            hook: "The full-ride possibility lands with the force of a second goal, only this time the net it hits is much deeper.",
+            burst: "FLASH!",
+            stamp: "Full Ride",
+            heroType: "scholarship-letter",
+            leftType: "trophy-dream",
+            rightType: "city-walk",
+            heroTitle: "One Final Performance",
+            heroCaption: "The scholarship is not guaranteed, but for the first time it is close enough to hurt when he reaches for it.",
+            leftTitle: "A Future Drawn in Light",
+            leftCaption: "Leo can already see new jerseys, new cities, and the possibility of his father no longer carrying everything alone.",
+            rightTitle: "Walking Out Changed",
+            rightCaption: "The hallway looks the same when he leaves the office, but he does not feel like the same person inside it.",
+            heroBubble: { label: "Scout", text: "Perform in the championship, and this conversation gets serious very quickly.", pos: "left-top" },
+            leftBubble: { label: "Dream", text: "Tuition paid. Housing covered. A real road forward.", pos: "right-top" },
+            rightBubble: { label: "Leo", text: "I can't mess this up.", pos: "left-bottom" },
+            dialogueOne: "Hope becomes sharper when it comes with conditions. It stops being fantasy and starts feeling like responsibility.",
+            dialogueTwo: "That is the exact moment Leo becomes most vulnerable to the truth waiting back at the grocery.",
+            focus: "The chapter peaks at possibility right before the story prepares to undercut it.",
+            pulse: "Hope stretches to its brightest point.",
+            paragraphs: [
+              "Then the scout says the words Leo has rehearsed in his mind for years: a full-ride athletic scholarship is possible if he delivers in the championship. Tuition, housing, training, all of it could be covered.",
+              "The office seems brighter after that sentence, almost falsely bright, as if the light itself has become part of the fantasy. Leo imagines not only college but relief: real relief, the kind that could travel back home with him.",
+              "He shakes hands, thanks the scout, and walks into the hallway with his pulse hammering harder than it did after the winning header. No cheer from the student body can compete with this feeling.",
+              "When he heads toward the grocery later, the scholarship news is alive in him like fire. He is ready to tell Sam that everything may finally be opening. He has no idea how violently the next chapter is about to turn."
+            ]
+          }
         ]
       },
       {
-        chapter: 'Chapter 4',
-        number: '04',
-        title: 'The Decision',
-        subtitle: 'The tragic twist and discovery',
-        mood: 'The tragic twist',
-        focus: 'Leo stops being only a dreamer here and becomes a son who sees the full weight his father has been carrying alone.',
-        pulse: 'Hope collides with the truth of debt, fear, and family vulnerability.',
-        paragraphs: [
-          'Leo bursts through the back entrance of the store ready to spill the scholarship news in one breath. He is smiling so hard it almost hurts. But the front aisle is strangely quiet, and the usual comfort of the grocery feels hollow, as if the room itself is holding tension. He hears his father’s voice from the office before he reaches the doorway, only it is not the steady, joking voice from the night before. It is low, broken, and shaking. Leo slows instinctively, the excitement in his body giving way to a cold unease he cannot explain yet.',
-          'From the shadow beside the half-open office door, he sees Sam hunched over the desk with one hand covering his face. On the wood surface lies a paper stamped with thick red words that immediately burn into Leo’s mind: overdue, final notice, bankruptcy. Sam’s other hand grips the phone so tightly his knuckles have turned white. He is pleading with someone on the other end, explaining through a cracking voice that the new supermarket chain down the road has swallowed most of his customers, that the store mortgage payment cannot be made this week, and that losing the shop may mean losing their home too. Every sentence lands on Leo like a blow.',
-          'He steps backward before the floor can creak and reveal him. Outside the office, in the dim aisle between canned goods and paper towels, Leo feels the scholarship papers in his hand turn suddenly weightless and meaningless.'
+        chapter: "Chapter 4",
+        number: "04",
+        title: "The Decision",
+        subtitle: "The tragic twist",
+        summary: "At the exact moment the future seems reachable, Leo discovers the debt, fear, and hidden collapse his father has been protecting him from.",
+        accent: "#3270ff",
+        secondary: "#ffe15f",
+        tint: "rgba(50, 112, 255, 0.16)",
+        glow: "rgba(149, 203, 255, 0.22)",
+        pages: [
+          {
+            title: "The Wrong Kind of Quiet",
+            hook: "Leo enters the grocery carrying scholarship news, but the store feels wrong before he knows why.",
+            burst: "HUSH.",
+            stamp: "Something Off",
+            heroType: "silent-aisle",
+            leftType: "store-close",
+            rightType: "office-truth",
+            heroTitle: "The Warmth Is Missing",
+            heroCaption: "The familiar aisles feel suddenly hollow, as if the room itself is holding its breath.",
+            leftTitle: "No Ordinary Evening",
+            leftCaption: "The store is open, but it has none of the casual rhythm Leo expects from it.",
+            rightTitle: "Voices Through the Door",
+            rightCaption: "Sam's tone changes first. The office only confirms what Leo already begins to fear.",
+            heroBubble: { label: "Leo", text: "Dad? You here?", pos: "right-top" },
+            leftBubble: { label: "Narration", text: "Even beloved places can become strange in a single minute.", pos: "left-top" },
+            rightBubble: { label: "Sam", text: "Please... listen, I'm trying.", pos: "right-bottom" },
+            dialogueOne: "Excitement makes people loud. Fear makes them careful. Leo hears carefulness before he sees anything else.",
+            dialogueTwo: "That shift is enough to chill him, even before the meaning catches up.",
+            focus: "The chapter begins by stripping comfort out of the most familiar place in the story.",
+            pulse: "Tension replaces warmth almost instantly.",
+            paragraphs: [
+              "Leo pushes into the store ready to spill the scholarship news in one breath. He is smiling before the door is even fully shut behind him, still carrying the fierce bright energy from Coach Mira's office.",
+              "But the grocery does not answer him the way it usually does. The front aisle is too still. The register is unattended. Even the hum of the coolers seems sharper, as though every ordinary noise has stepped into the foreground to cover something else.",
+              "Then he hears Sam's voice from the office. It is low, strained, and unlike the version of his father that usually fills this space with warmth and certainty.",
+              "Leo slows without deciding to. Some colder instinct inside him realizes what the rest of him is not ready to know yet: this is not a normal problem waiting behind that half-open door."
+            ]
+          },
+          {
+            title: "Red Stamp",
+            hook: "The truth arrives in fragments first: a plea into the phone, white knuckles, and one sheet of paper burning red against the desk.",
+            burst: "GULP.",
+            stamp: "Final Notice",
+            heroType: "red-notice",
+            leftType: "office-truth",
+            rightType: "silent-aisle",
+            heroTitle: "Overdue. Final Notice. Bankruptcy.",
+            heroCaption: "Leo reads the page before he means to, and once he does, he cannot unread any part of it.",
+            leftTitle: "Sam on the Phone",
+            leftCaption: "His father's voice cracks on words Leo has never heard him struggle to say.",
+            rightTitle: "The Aisle Outside",
+            rightCaption: "The distance between the office and the canned goods suddenly feels enormous.",
+            heroBubble: { label: "Narration", text: "Some words do not need to be explained once you see them in red.", pos: "left-top" },
+            leftBubble: { label: "Sam", text: "The mortgage payment can't be made this week.", pos: "right-top" },
+            rightBubble: { label: "Leo", text: "No...", pos: "left-bottom" },
+            dialogueOne: "The scholarship papers in Leo's hand lose their weight all at once. They still matter, but not in the same order anymore.",
+            dialogueTwo: "A bigger future cannot outrun a family emergency that is already at the door.",
+            focus: "Leo sees the scale of Sam's burden for the first time and understands how much has been hidden from him.",
+            pulse: "The chapter tightens into shock and helplessness.",
+            paragraphs: [
+              "From the shadow beside the office, Leo sees Sam bent over the desk with one hand across his face and the other clamped around the phone. His shoulders are pitched forward in a way Leo has never seen, as if the conversation itself is physically pressing him down.",
+              "On the desk, half under an invoice pad, lies a paper stamped with hard red words: overdue, final notice, bankruptcy. The letters are so blunt they almost do not look real.",
+              "Sam's voice breaks as he explains that the new supermarket chain down the road has drained too many customers, that the mortgage payment on the store cannot be met on time, and that losing the business may mean losing their home too.",
+              "Each sentence lands on Leo like a separate blow. The scholarship in his hand, the one he came in desperate to celebrate, becomes suddenly light and useless in comparison."
+            ]
+          },
+          {
+            title: "Stepping Back",
+            hook: "Leo backs out of the moment before the floor can betray him, but the truth follows him into the aisle anyway.",
+            burst: "STEP.",
+            stamp: "No Witnesses",
+            heroType: "silent-aisle",
+            leftType: "night-window",
+            rightType: "trophy-dream",
+            heroTitle: "The Future Splits in Two",
+            heroCaption: "One version of tomorrow asks him to chase a scholarship. The other asks him to protect his father first.",
+            leftTitle: "Breathless in the Aisle",
+            leftCaption: "Among canned goods and paper towels, Leo becomes aware of how young and how responsible he suddenly feels.",
+            rightTitle: "What Success Costs Now",
+            rightCaption: "The dream is still shining, but now it stands beside a much more immediate fear.",
+            heroBubble: { label: "Leo", text: "How long has he been carrying this by himself?", pos: "right-top" },
+            leftBubble: { label: "Narration", text: "Shock rarely looks dramatic from the outside. Sometimes it just looks like standing still.", pos: "left-top" },
+            rightBubble: { label: "Future", text: "What if both things need him at once?", pos: "left-bottom" },
+            dialogueOne: "The worst part is not the money itself. It is the realization that Sam has been protecting him from this without asking for help.",
+            dialogueTwo: "Love can feel tender from a distance. Up close, it can feel like guilt.",
+            focus: "The emotional center moves from ambition to responsibility.",
+            pulse: "The chapter becomes inward, silent, and morally heavy.",
+            paragraphs: [
+              "Leo steps backward before a loose board can creak under him and reveal that he has heard everything. His body obeys instinct long before his mind organizes what it has learned.",
+              "Outside the office, in the dim aisle between canned goods and paper towels, he stares at the scholarship folder in his hand as if it belongs to someone else. Ten minutes ago it felt like the answer to everything. Now it feels like part of a question he does not know how to survive.",
+              "He thinks about Sam smiling behind the counter the night before, laughing in the back kitchen, bragging to customers. Had all of that been happening with this fear already lodged in his chest?",
+              "The thought hurts more than the numbers do. Debt is frightening. But the image of his father standing upright under all of it, pretending he was fine, is what breaks something open in Leo."
+            ]
+          },
+          {
+            title: "Family First",
+            hook: "By the time Leo finally speaks to Sam that night, the decision has already formed inside him.",
+            burst: "LOCK.",
+            stamp: "A Choice",
+            heroType: "store-close",
+            leftType: "kitchen-hug",
+            rightType: "crate-load",
+            heroTitle: "The Dream Waits. The Family Doesn't.",
+            heroCaption: "Leo does not say the words lightly, but once he says them, he means every single one.",
+            leftTitle: "No More Hiding",
+            leftCaption: "Sam tries to protect him again, even now, by pretending the situation is smaller than it is.",
+            rightTitle: "Work Ahead",
+            rightCaption: "Leo can already see the mornings, deliveries, and missed practices lined up in front of him.",
+            heroBubble: { label: "Leo", text: "I know, Dad. I heard everything.", pos: "left-top" },
+            leftBubble: { label: "Sam", text: "You should be thinking about the final.", pos: "right-top" },
+            rightBubble: { label: "Leo", text: "I'm thinking about us.", pos: "left-bottom" },
+            dialogueOne: "Sometimes the heroic choice is not the loud one. Sometimes it is the one that quietly rearranges the rest of your life.",
+            dialogueTwo: "Leo knows exactly what he is giving up. He makes the choice anyway.",
+            focus: "The chapter ends with sacrifice chosen consciously, not accidentally.",
+            pulse: "Shock hardens into resolve.",
+            paragraphs: [
+              "He waits until the front lights are dimmed and the last inventory sheet is stacked before bringing it up. Sam tries to deny everything at first, then tries to soften it, then tries to push the whole conversation away as if it can be postponed long enough to protect his son one more time.",
+              "Leo does not let him. He says he knows. He says he heard. Then he tells Sam the part that matters most: he is not going to stand by while the store and the home beneath it tip toward collapse.",
+              "Sam protests immediately. The championship is days away. The scout may never come back. Opportunities like this do not wait. Leo knows all of that and says yes to the cost before his father can even finish outlining it.",
+              "Family comes first. The sentence sounds steady coming out of his mouth, but inside it splits him open. That is how the chapter closes: not with a goal, but with a promise heavy enough to redirect an entire future."
+            ]
+          }
         ]
       },
       {
-        chapter: 'Chapter 5',
-        number: '05',
-        title: 'The Corner Store',
-        subtitle: 'The sacrifice and hard labor',
-        mood: 'Sacrifice and hard labor',
-        focus: 'Leo chooses family first, sacrificing practice, rest, and reputation to protect Sam’s dignity and keep the store alive.',
-        pulse: 'The emotional center deepens as sport gives way to labor, secrecy, and duty.',
-        paragraphs: [
-          'That night, Leo waits until the front lights are dimmed and the last inventory sheet is stacked before telling Sam he knows everything. Sam tries to deny it at first, tries to smile it away, tries to protect his son even now, but Leo cuts gently through every excuse. His decision is already made. He says he will cover the early morning shifts, handle late-night deliveries, restock shelves, and do whatever is necessary to keep the store open through the end of the month. Sam stares at him in disbelief, immediately protesting that the championship is days away and that the scout may never return if Leo disappears from training. Leo answers with words that sound steady even as they crack inside him: family comes first.',
-          'The next days grind him down with brutal efficiency. At four in the morning he is dragging crates of oranges, sacks of rice, and boxes of bottled drinks from delivery vans while the rest of the city still sleeps. By school hours, his arms feel heavy and his eyelids burn, yet he forces himself through class with his head upright. Afternoons that once belonged to drills, sprints, and finishing practice now disappear into sweeping aisles, stacking products, handling customers, and racing on bicycle deliveries through narrow streets.',
-          'Phone calls from teammates pile up unanswered. His coach leaves messages that shift from concern to frustration. Friends assume he is acting selfish, arrogant, or careless, and some of them accuse him of abandoning the team at the worst possible moment.'
+        chapter: "Chapter 5",
+        number: "05",
+        title: "The Corner Store",
+        subtitle: "Sacrifice and hard labor",
+        summary: "Leo throws himself into the grocery's survival, trading training time for shifts, deliveries, and a week of relentless physical exhaustion.",
+        accent: "#00a57e",
+        secondary: "#ffd24a",
+        tint: "rgba(0, 165, 126, 0.16)",
+        glow: "rgba(119, 243, 205, 0.22)",
+        pages: [
+          {
+            title: "Before Dawn",
+            hook: "The week begins in darkness, with delivery vans, bruised shoulders, and air cold enough to sting him awake.",
+            burst: "THUD!",
+            stamp: "4:00 AM",
+            heroType: "crate-load",
+            leftType: "work-grind",
+            rightType: "delivery-bike",
+            heroTitle: "The New Training Ground",
+            heroCaption: "Instead of cones and drills, Leo's mornings now begin with stacked oranges, rice sacks, and aching wrists.",
+            leftTitle: "Lift, Carry, Repeat",
+            leftCaption: "The labor is not glamorous enough to notice, but it leaves its proof in every movement he makes later.",
+            rightTitle: "Out Before Sunrise",
+            rightCaption: "By the time the city wakes up, Leo already feels like he has lived a whole day.",
+            heroBubble: { label: "Narration", text: "Some weeks turn a teenager into extra staff before he has time to complain.", pos: "left-top" },
+            leftBubble: { label: "Leo", text: "Okay. Again.", pos: "right-top" },
+            rightBubble: { label: "Sam", text: "You don't have to do all this.", pos: "left-bottom" },
+            dialogueOne: "Work uses the body differently than football does. By sunrise, Leo already knows he is accumulating the wrong kind of fatigue.",
+            dialogueTwo: "But the store needs hands, not perfect game legs, and that settles the argument for him.",
+            focus: "Leo's sacrifice becomes physical immediately.",
+            pulse: "Duty replaces excitement with repetition and strain.",
+            paragraphs: [
+              "At four in the morning, the city still belongs to trucks, street sweepers, and the people who do invisible work before everybody else wakes up. Leo joins them with stiff shoulders and not enough sleep behind his eyes.",
+              "He drags crates of oranges from the delivery van, then sacks of rice, then boxes of bottled drinks heavy enough to make his forearms burn. Sam keeps telling him to slow down. Leo keeps pretending the weight is not as bad as it feels.",
+              "The cold air helps only a little. This is not training fatigue. This is a heavier, duller exhaustion that settles into the joints and stays there.",
+              "By the time the first streaks of morning touch the street outside, Leo has already learned the rhythm of the week: lift, carry, stack, smile, repeat."
+            ]
+          },
+          {
+            title: "School on Empty",
+            hook: "The hours after the shift are worse because they ask Leo to look normal while nothing in him feels normal anymore.",
+            burst: "DRAG.",
+            stamp: "No Sleep",
+            heroType: "hallway-hype",
+            leftType: "phone-glow",
+            rightType: "empty-field",
+            heroTitle: "Trying to Stay Upright",
+            heroCaption: "In class, the body wants rest and the mind wants ten different futures at once.",
+            leftTitle: "Missed Calls",
+            leftCaption: "Teammates, Coach Mira, and friends keep reaching for him, but each unanswered call becomes another quiet lie.",
+            rightTitle: "Training Without Him",
+            rightCaption: "Somewhere else, the team is rehearsing patterns that Leo should be inside of.",
+            heroBubble: { label: "Phone", text: "Coach Mira calling...", pos: "right-top" },
+            leftBubble: { label: "Leo", text: "I'll answer later.", pos: "left-bottom" },
+            rightBubble: { label: "Narration", text: "Later keeps moving farther away every hour.", pos: "right-bottom" },
+            dialogueOne: "Exhaustion is not only physical. It also asks you to keep inventing reasons for the people who are starting to wonder about you.",
+            dialogueTwo: "Each call he ignores buys one more hour for the store and costs one more ounce of trust somewhere else.",
+            focus: "The sacrifice widens from labor into social and emotional isolation.",
+            pulse: "The chapter presses on Leo from every side at once.",
+            paragraphs: [
+              "At school, Leo fights sleep the way he normally fights defenders: by staying alert through pure stubbornness. His eyelids burn, his notes blur, and his muscles keep remembering the crates from dawn whenever he reaches for a book.",
+              "His phone lights up with texts from teammates asking where he has been and whether he plans to show up at practice. Coach Mira calls twice before lunch. Leo turns the screen face down every time.",
+              "He tells himself he will explain everything later, when the store is safe, when the final is closer, when there is a version of the truth that does not sound impossible. But that better moment never arrives.",
+              "Meanwhile, the team keeps training without him. Every missed session adds another invisible distance between Leo and the field he was supposed to be preparing to conquer."
+            ]
+          },
+          {
+            title: "The Long Afternoons",
+            hook: "Once school ends, the second half of Leo's workday begins, and it is no kinder than the first.",
+            burst: "CLACK!",
+            stamp: "Inventory",
+            heroType: "grocery-shelves",
+            leftType: "store-front",
+            rightType: "delivery-bike",
+            heroTitle: "Restocking the Whole World",
+            heroCaption: "Shelves, cartons, mops, small purchases, change drawers, delivery slips. Every hour splits into another task.",
+            leftTitle: "Keeping the Door Open",
+            leftCaption: "The grocery survives not because business is booming but because Leo and Sam refuse to let it stop breathing.",
+            rightTitle: "One More Delivery",
+            rightCaption: "The city becomes a maze of narrow streets and heavy bags balanced against fading strength.",
+            heroBubble: { label: "Customer", text: "Can you grab one more case from the back?", pos: "left-top" },
+            leftBubble: { label: "Sam", text: "Thanks, Leo. Really.", pos: "right-bottom" },
+            rightBubble: { label: "Leo", text: "Yeah. I got it.", pos: "left-bottom" },
+            dialogueOne: "By the afternoon, every yes Leo gives costs more than the last one, but he keeps saying yes anyway.",
+            dialogueTwo: "The exhaustion becomes so constant that it starts feeling like background weather instead of pain.",
+            focus: "The chapter shows the relentless practical texture of keeping a store alive day by day.",
+            pulse: "The grind deepens and stretches out.",
+            paragraphs: [
+              "After school, Leo heads straight back to the store. There is no transition, no rest, no moment to become a teenager again before the next list of tasks appears in front of him.",
+              "He restocks shelves, sweeps the front, carries produce from the back room, bags groceries, helps an elderly customer to the curb, and then climbs onto the delivery bike with two heavy paper sacks balanced across the rear rack.",
+              "The city he used to move through lightly now feels steep and longer than before. Every hill asks something from his legs that the morning already took away. Every extra block presses against the little reserve he keeps trying to hide from Sam.",
+              "Still, the store stays open another day, and that matters enough to make the pain feel almost justified."
+            ]
+          },
+          {
+            title: "Rumors and Resentment",
+            hook: "By the end of the week, the people around Leo begin to fill the silence with the wrong story.",
+            burst: "BUZZ.",
+            stamp: "Misread",
+            heroType: "phone-glow",
+            leftType: "hallway-hype",
+            rightType: "spotlight-player",
+            heroTitle: "Absence Starts Talking for Him",
+            heroCaption: "When you stop showing up, other people rarely imagine the noblest explanation first.",
+            leftTitle: "Whispers at School",
+            leftCaption: "Some say he thinks he is too important now. Others say the scout already got to his head.",
+            rightTitle: "A Reputation Slips",
+            rightCaption: "Leo can feel himself becoming a different story in other people's mouths.",
+            heroBubble: { label: "Message", text: "If you don't care, just say that.", pos: "right-top" },
+            leftBubble: { label: "Narration", text: "Silence creates room, and rumor hates empty space.", pos: "left-top" },
+            rightBubble: { label: "Leo", text: "If I explained it, would it even help?", pos: "left-bottom" },
+            dialogueOne: "Being misunderstood hurts differently when you know the truth is rooted in love.",
+            dialogueTwo: "The problem is that love does not provide a simple excuse anyone else can see from outside.",
+            focus: "Leo's sacrifice now costs him reputation and belonging too.",
+            pulse: "Isolation settles in as the chapter closes.",
+            paragraphs: [
+              "By Thursday, teammates stop sounding worried and start sounding angry. A few texts accuse him of disappearing at the worst possible time. One friend asks bluntly whether the scout's attention went to his head.",
+              "At school, Leo catches his name spoken in halves when he passes a doorway. He does not need to hear every word to understand the shape of what people have decided.",
+              "From the outside, arrogance explains his absence better than family crisis does. Pride is a cleaner story than sacrifice. People reach for the clean story first.",
+              "Leo carries that misunderstanding the same way he carries the boxes and grocery bags: with his teeth clenched and his shoulders set. It is only temporary, he tells himself. He just has to survive until the store is safe again. He does not yet understand how close he already is to breaking."
+            ]
+          }
         ]
       },
       {
-        chapter: 'Chapter 6',
-        number: '06',
-        title: 'The Plan',
-        subtitle: 'The lowest emotional point',
-        mood: 'Lowest emotional point',
-        focus: 'Leo finally breaks under exhaustion, grief, and impossible responsibility, while Sam sees the cost of the silence between them.',
-        pulse: 'This is the emotional collapse, the soaked pavement, and the first honest release of pain.',
-        paragraphs: [
-          'By Thursday night, Leo has become a moving ache. He has slept in scraps, eaten in a hurry, and traded every minute of recovery for work. The city darkens under a violent storm, and rain begins to hammer the streets so hard that headlights smear across the pavement in ribbons of white and gold. Still, there are deliveries to finish. Leo shoulders two overloaded grocery bags and hurries down a steep sidewalk where water rushes along the curb like a shallow river. His shoes are slick, his legs are trembling, and every step feels one second away from failure.',
-          'Failure arrives all at once. His foot catches on uneven concrete and his body slams to the ground with a force that knocks the breath from him. The bags burst open. Oranges scatter and bounce into the gutter, cartons split, glass jars shatter across the road, and muddy water swallows everything he had been trying so desperately to hold together.',
-          'So he stops pretending. There on the wet pavement, under the cold assault of the storm, Leo buries his face in his hands and cries with the helplessness of someone who has pushed past strength into emptiness. A pair of headlights washes over him. Moments later, the rain stops hitting his head because an umbrella opens above him.'
+        chapter: "Chapter 6",
+        number: "06",
+        title: "The Plan",
+        subtitle: "The lowest emotional point",
+        summary: "Exhaustion, weather, and impossible responsibility finally collide, pushing Leo past composure and into the first honest breakdown of the story.",
+        accent: "#2350ff",
+        secondary: "#7fd8ff",
+        tint: "rgba(35, 80, 255, 0.16)",
+        glow: "rgba(165, 198, 255, 0.22)",
+        pages: [
+          {
+            title: "Storm Warning",
+            hook: "By Thursday evening, the whole city seems to agree with Leo's body that something is about to give way.",
+            burst: "RUMBLE.",
+            stamp: "Pressure Front",
+            heroType: "rain-street",
+            leftType: "work-grind",
+            rightType: "phone-glow",
+            heroTitle: "The Weather Turns with Him",
+            heroCaption: "Heavy clouds, heavy legs, heavy thoughts. The chapter begins like a storm that has already decided where it will land.",
+            leftTitle: "No Recovery",
+            leftCaption: "Sleep has become scraps, meals have become fuel, and every reserve Leo once had is now almost spent.",
+            rightTitle: "Calls He Can't Take",
+            rightCaption: "The phone keeps glowing like a second accusation in his pocket.",
+            heroBubble: { label: "Narration", text: "Some collapses arrive long before the falling starts.", pos: "left-top" },
+            leftBubble: { label: "Leo", text: "Just get through tonight.", pos: "right-top" },
+            rightBubble: { label: "Phone", text: "Coach Mira calling...", pos: "left-bottom" },
+            dialogueOne: "The storm outside is dramatic, but the quieter disaster is the one Leo has been dragging behind his eyes all week.",
+            dialogueTwo: "Everything inside him is asking for pause. Life keeps answering with one more task.",
+            focus: "The chapter opens by aligning weather, emotion, and exhaustion into one shared threat.",
+            pulse: "Dread builds before the fall itself arrives.",
+            paragraphs: [
+              "By Thursday night, Leo has become a moving ache. He has slept in fragments, eaten too fast to taste anything, and traded every possible minute of recovery for one more hour of keeping the store alive.",
+              "Outside, the city darkens under a violent sky. Rain starts as a warning against the windows and then thickens into something much harder, a full attack on pavement, rooftops, awnings, and nerves.",
+              "There are still deliveries to finish. That fact feels absurd and unavoidable at the same time.",
+              "Leo shoulders the bags because there is nobody else to do it. The moment he steps into the storm, he understands how little is left in him."
+            ]
+          },
+          {
+            title: "The Slip",
+            hook: "Failure does not arrive slowly. It comes in one bad step, one sharp impact, and one second too fast to stop.",
+            burst: "CRASH!",
+            stamp: "Impact",
+            heroType: "storm-fall",
+            leftType: "rain-street",
+            rightType: "umbrella-reach",
+            heroTitle: "Everything Hits at Once",
+            heroCaption: "The bags tear, the pavement rises, and the week finally claims the body that kept pretending it was still strong enough.",
+            leftTitle: "The Street Goes Slick",
+            leftCaption: "Water races along the curb and turns the sidewalk into something closer to a trap than a road.",
+            rightTitle: "Too Late to Catch It",
+            rightCaption: "Not every mess can be saved once it is already flying apart in the rain.",
+            heroBubble: { label: "Leo", text: "No, no, no—", pos: "right-top" },
+            leftBubble: { label: "Narration", text: "His shoes lose the ground a fraction before his mind understands why.", pos: "left-top" },
+            rightBubble: { label: "Sound", text: "SHATTER.", pos: "left-bottom" },
+            dialogueOne: "Sometimes disaster is less an event than a permission slip, the moment your body finally chooses honesty over pride.",
+            dialogueTwo: "Every orange in the gutter and every broken jar feels like one more piece of his control leaving him.",
+            focus: "The fall literalizes the emotional collapse Leo has been postponing.",
+            pulse: "Tension breaks into chaos and helplessness.",
+            paragraphs: [
+              "His foot catches on uneven concrete hidden under the rushing water, and the next part happens too quickly for dignity. The bags swing wide, his knee slams down, and the breath tears out of him in one stunned rush.",
+              "Oranges bounce into the gutter. Cartons split open. A jar breaks across the road and smears itself into rainwater and glass. For one humiliating second, Leo can only stare at the damage as if looking might reverse it.",
+              "But the storm keeps doing what storms do. Water drags everything farther away while headlights smear gold across the road behind him.",
+              "The whole week seems to condense into that one ruined delivery: hard work, desperate effort, and total inability to hold the important things together."
+            ]
+          },
+          {
+            title: "No More Pretending",
+            hook: "The pavement becomes the first place all week where Leo stops acting stronger than he feels.",
+            burst: "BREAK.",
+            stamp: "Open Wound",
+            heroType: "storm-fall",
+            leftType: "empty-field",
+            rightType: "night-window",
+            heroTitle: "The Cry Finally Comes",
+            heroCaption: "Cold rain and public failure strip away the last bit of composure he was using like armor.",
+            leftTitle: "No Team Here",
+            leftCaption: "There is no crowd, no coach, no big saving play waiting for him. Only exhaustion and a city that keeps moving.",
+            rightTitle: "Everything Feels Far Away",
+            rightCaption: "Scholarships, finals, apologies, and explanations all seem impossible from the wet street.",
+            heroBubble: { label: "Leo", text: "I can't do this. I can't.", pos: "left-bottom" },
+            leftBubble: { label: "Narration", text: "He has pushed past strength into emptiness.", pos: "right-top" },
+            rightBubble: { label: "Future", text: "What if I lose everything anyway?", pos: "right-bottom" },
+            dialogueOne: "The cry is not elegant. That is what makes it true.",
+            dialogueTwo: "Relief and shame arrive together, because finally telling the truth about pain also means admitting how deep it already went.",
+            focus: "Leo's breakdown becomes the emotional turning point the story has been building toward.",
+            pulse: "The chapter reaches its lowest, rawest point.",
+            paragraphs: [
+              "There on the pavement, in the cold spill of streetlight and rain, Leo finally stops pretending. He buries his face in his hands and cries with the helplessness of someone who has spent too many days holding up more than one life at once.",
+              "It is not one clean reason he cries for. It is all of them together: the store, Sam, the team, the missed practices, the scholarship, the fear that none of his choices will be enough to save anything.",
+              "The city does not pause for him. Cars keep moving. Rain keeps hammering the street. Water keeps carrying the groceries away in small humiliating currents.",
+              "That indifference somehow makes the moment more honest. Leo is not collapsing on a stage. He is collapsing in real life, where nobody gets background music and no one guarantees rescue."
+            ]
+          },
+          {
+            title: "Under the Umbrella",
+            hook: "When the rescue arrives, it does not come as a miracle. It comes as Sam standing in the rain beside his son.",
+            burst: "TAP.",
+            stamp: "Found",
+            heroType: "umbrella-reach",
+            leftType: "kitchen-hug",
+            rightType: "storm-fall",
+            heroTitle: "You're Not Alone",
+            heroCaption: "The umbrella opens, and the chapter finally lets love step into the storm instead of waiting in safety for it to end.",
+            leftTitle: "Sam Sees the Cost",
+            leftCaption: "In one look, Sam understands what Leo's silence has really been doing to him.",
+            rightTitle: "The Rain Keeps Falling",
+            rightCaption: "The storm does not stop. What changes is that Leo is no longer standing inside it by himself.",
+            heroBubble: { label: "Sam", text: "You're not by yourself. Not for this.", pos: "left-top" },
+            leftBubble: { label: "Leo", text: "I tried. I tried so hard.", pos: "right-bottom" },
+            rightBubble: { label: "Narration", text: "Sometimes love is simply arriving before the person you love has fully disappeared into the dark.", pos: "left-bottom" },
+            dialogueOne: "Sam does not fix the debt in this moment. He does something gentler and just as necessary: he witnesses the damage honestly.",
+            dialogueTwo: "That witness is what allows the story to begin climbing again.",
+            focus: "The page ends not with a solved problem but with shared pain, which is the first real step back toward hope.",
+            pulse: "The chapter closes in tenderness rather than resolution.",
+            paragraphs: [
+              "A pair of headlights washes over the pavement. Then the rain stops hitting Leo's face because an umbrella opens above him and settles into place with a soft, ordinary sound.",
+              "Sam kneels in the water without caring that his trousers are getting soaked through. He does not start with a lecture or an apology. He starts by putting one steady hand on Leo's shoulder and staying there.",
+              "When Leo manages to speak, the words come out torn and uneven. He says he tried. He says he thought he could hold everything together if he just worked hard enough. Sam listens to every broken piece of it.",
+              "Nothing is fixed yet. The debt still exists. The final still looms. But for the first time all week, the weight is being carried by more than one person. That is enough to keep the story from breaking completely."
+            ]
+          }
         ]
       },
       {
-        chapter: 'Chapter 7',
-        number: '07',
-        title: 'The Rally',
-        subtitle: 'The turning point and hope returns',
-        mood: 'Hope returns',
-        focus: 'The community becomes a real character, transforming Leo’s loneliness into belonging and strength.',
-        pulse: 'Cold distance gives way to support, memory, and rising belief.',
-        paragraphs: [
-          'Saturday arrives with the hard brightness of a day that has already decided it will be remembered. In the locker room, Leo sits in silence lacing his cleats with stiff fingers while the air around him remains tense. Some teammates still will not meet his eyes, and his legs feel heavier than they ever have before a match. Yet beneath the fatigue is something new. The memory of Sam kneeling in the rain has settled into him like a steady flame. Leo no longer needs glory for its own sake. He needs purpose, and purpose is stronger than applause.',
-          'When he steps out of the tunnel and the stadium opens before him, he instinctively searches the crowd for his father. Then he sees something that stops him where he stands. Sam is in the front rows, but he is not alone. Around him are dozens of neighborhood customers from the grocery: elderly women who always ask after Leo’s grades, delivery drivers, children who buy candy after school, parents who have trusted Sam for years. They hold bright hand-painted signs above their heads that read TEAM SAM’S GROCERY, GO LEO, OUR CHAMPION, and WE STAND WITH FAMILY.',
-          'In that instant, the loneliness of the week breaks apart. The people Sam served with kindness, credit, patience, and dignity have come back for him, and through him, for Leo.'
+        chapter: "Chapter 7",
+        number: "07",
+        title: "The Rally",
+        subtitle: "Hope returns",
+        summary: "What looked like a private family collapse becomes a public act of loyalty as the neighborhood shows up for Sam and Leo together.",
+        accent: "#f4511e",
+        secondary: "#73f5c9",
+        tint: "rgba(244, 81, 30, 0.16)",
+        glow: "rgba(255, 231, 114, 0.2)",
+        pages: [
+          {
+            title: "Morning After",
+            hook: "Saturday arrives clear and hard, the kind of day that feels like it has already decided to be remembered.",
+            burst: "SHINE.",
+            stamp: "Match Day",
+            heroType: "tunnel-walk",
+            leftType: "team-huddle",
+            rightType: "empty-field",
+            heroTitle: "Back Toward the Final",
+            heroCaption: "Leo is still tired, still sore, and still unsure whether his team will welcome him back the way he hopes.",
+            leftTitle: "Not Fully Forgiven",
+            leftCaption: "Some teammates avoid his eyes, and the locker room air feels tighter than usual.",
+            rightTitle: "One More Chance",
+            rightCaption: "The field ahead looks both familiar and newly dangerous after everything the week has cost.",
+            heroBubble: { label: "Narration", text: "Purpose is stronger than applause. Leo understands that now.", pos: "left-top" },
+            leftBubble: { label: "Teammate", text: "You picked a bad week to disappear.", pos: "right-top" },
+            rightBubble: { label: "Leo", text: "I know. I just need one chance to make it right.", pos: "left-bottom" },
+            dialogueOne: "The rain may be gone, but nothing about the emotional weather feels fully cleared yet.",
+            dialogueTwo: "Leo is no longer chasing glory for its own sake. That change makes him steadier than before, even while the room remains tense.",
+            focus: "The chapter opens with uncertainty rather than instant redemption.",
+            pulse: "Hope returns slowly, not cheaply.",
+            paragraphs: [
+              "Saturday morning feels brutally bright after the previous night's storm. Leo dresses for the final with heavy legs and the kind of quiet focus that comes from having already survived something worse than nerves.",
+              "In the locker room, the tension is obvious. A few teammates offer curt nods. A few say nothing at all. Coach Mira watches him closely but chooses not to start with questions he cannot answer in one sentence.",
+              "Leo accepts the coldness because he knows he earned at least part of it from the outside perspective. He was absent when the team needed him. The reasons do not erase the reality.",
+              "Still, something inside him has changed. He no longer needs the match to prove that he is special. He needs it because it belongs to the people he loves."
+            ]
+          },
+          {
+            title: "The Crowd Revealed",
+            hook: "Then Leo steps toward the field and sees that Sam is not alone in the stands.",
+            burst: "ROAR!",
+            stamp: "They Came",
+            heroType: "community-rally",
+            leftType: "sign-crowd",
+            rightType: "crowd-wave",
+            heroTitle: "The Neighborhood Shows Up",
+            heroCaption: "Customers, drivers, parents, and kids fill the rows around Sam with hand-painted signs and voices he recognizes from the store.",
+            leftTitle: "Signs in the Air",
+            leftCaption: "TEAM SAM'S. GO LEO. FAMILY FIRST. Every sign turns private gratitude into public support.",
+            rightTitle: "A Different Kind of Noise",
+            rightCaption: "This crowd is not only cheering for a team. It is defending a family.",
+            heroBubble: { label: "Crowd", text: "GO LEO! GO SAM'S!", pos: "center-top" },
+            leftBubble: { label: "Leo", text: "They came for us?", pos: "left-bottom" },
+            rightBubble: { label: "Sam", text: "You helped people too, kid. They remember.", pos: "right-bottom" },
+            dialogueOne: "For the first time in days, Leo feels something stronger than pressure pressing against his chest. He feels belonging.",
+            dialogueTwo: "The loneliness of the week cracks open all at once.",
+            focus: "The community becomes a character, not just a backdrop.",
+            pulse: "Hope arrives through other people.",
+            paragraphs: [
+              "When Leo emerges from the tunnel, his eyes search for Sam automatically. He finds him near the front row, but what stops him in his tracks is everyone else standing with him.",
+              "There are elderly customers who always ask about school, delivery drivers from the early-morning route, children who buy candy after class, and parents who have leaned on Sam's patience more than once over the years.",
+              "They hold hand-painted signs over their heads with uneven letters and bright colors that only make them more moving. TEAM SAM'S. GO LEO. WE STAND WITH FAMILY.",
+              "The sight rearranges something inside him. The crisis has not only been witnessed. It has been answered."
+            ]
+          },
+          {
+            title: "What Kindness Builds",
+            hook: "The chapter pauses long enough to show why the crowd matters: it is made of relationships Sam built one quiet act at a time.",
+            burst: "LOOK.",
+            stamp: "Payback",
+            heroType: "sign-crowd",
+            leftType: "store-front",
+            rightType: "grocery-shelves",
+            heroTitle: "Years of Quiet Help Come Back at Once",
+            heroCaption: "Credit extended, groceries carried, patience offered, worries heard. None of it looked heroic at the time, but all of it is here now.",
+            leftTitle: "The Store as Memory",
+            leftCaption: "Every shelf in Sam's Corner has been part of somebody else's hard week before.",
+            rightTitle: "Belonging Has Receipts",
+            rightCaption: "Communities are built in tiny transactions of care long before they become visible on stadium bleachers.",
+            heroBubble: { label: "Narration", text: "Kindness is slow to count itself and fast to be remembered.", pos: "left-top" },
+            leftBubble: { label: "Neighbor", text: "Your dad carried us more than once.", pos: "right-top" },
+            rightBubble: { label: "Leo", text: "I didn't know it reached this far.", pos: "left-bottom" },
+            dialogueOne: "The crowd turns Sam's generosity from a private family trait into public evidence.",
+            dialogueTwo: "Leo begins to understand that his father built more than a business. He built a network of people who refuse to let him fall quietly.",
+            focus: "The story widens beyond Leo's ambitions and into Sam's legacy.",
+            pulse: "The emotional center warms and deepens.",
+            paragraphs: [
+              "As the noise swells around him, Leo starts recognizing faces and remembering stories. A driver whose paycheck ran late once left the store with groceries anyway. A grandmother whose knees hurt always had her bags carried out by Sam before she even asked.",
+              "None of those moments felt cinematic when they happened. They were just the daily choices of a decent man trying to serve his block with dignity.",
+              "But on this morning, all of that ordinary goodness rises together into something almost overwhelming. The crowd is not a surprise gift. It is a return on years of quiet kindness.",
+              "That realization steadies Leo more than any pep talk could. Whatever happens in the final, the story is no longer only about one athlete trying to save one family by himself."
+            ]
+          },
+          {
+            title: "Purpose",
+            hook: "By kickoff, Leo is still tired, but the reason he is playing has become larger and clearer than it has ever been.",
+            burst: "READY.",
+            stamp: "Return",
+            heroType: "field-return",
+            leftType: "team-huddle",
+            rightType: "stadium-run",
+            heroTitle: "He Steps Back In Different",
+            heroCaption: "The same field that once promised personal glory now feels like a place where loyalty can become action.",
+            leftTitle: "The Team Around Him",
+            leftCaption: "Resentment has not vanished, but the shape of the match begins to matter more than old frustration.",
+            rightTitle: "Movement Comes Back",
+            rightCaption: "Even with heavy legs, Leo's instincts wake up the moment the ball starts moving.",
+            heroBubble: { label: "Coach Mira", text: "Play simple. Trust what you know.", pos: "right-top" },
+            leftBubble: { label: "Leo", text: "I don't need the spotlight. I need the result.", pos: "left-bottom" },
+            rightBubble: { label: "Narration", text: "Purpose makes room where ego used to stand.", pos: "right-bottom" },
+            dialogueOne: "Hope is not the same as ease. Leo is still carrying pain into the final. He is just not carrying it alone anymore.",
+            dialogueTwo: "That difference is enough to return breath to him.",
+            focus: "The chapter ends by re-centering the match with renewed meaning.",
+            pulse: "Belief comes back steady rather than flashy.",
+            paragraphs: [
+              "Coach Mira gathers the players and speaks in clipped, practical phrases, but Leo barely needs the strategy to settle him. The deeper change has already happened in the stands.",
+              "He is still not fully sure whether every teammate has forgiven him. That matters less now than the fact that they are about to share the same field again, aiming at the same outcome.",
+              "When he takes his position and the whistle calls the final into being, his body complains immediately. Yet underneath the fatigue there is a cleaner strength than before.",
+              "Leo is no longer playing to become seen. He is playing to honor what he has seen: his father's sacrifice, the neighborhood's loyalty, and the possibility that community itself can carry people farther than talent alone."
+            ]
+          }
         ]
       },
       {
-        chapter: 'Chapter 8',
-        number: '08',
-        title: 'The Corner Strike',
-        subtitle: 'The big, happy, victorious ending',
-        mood: 'Victorious ending',
-        focus: 'Leo becomes complete here: athlete, son, teammate, and symbol of a community that refused to let one family fall.',
-        pulse: 'Everything converges into sacrifice rewarded, forgiveness restored, and a future finally opened.',
-        paragraphs: [
-          'The final is every bit as punishing as the week that led into it. The opposing side is sharper, fresher, and ruthless in the tackle, striking first and then closing space with relentless discipline. Leo fights through heavy legs and burning lungs, but by the eighty-fifth minute it feels as though his body has been filled with sand. Every sprint asks for more than he has left. Still, each time he glances toward the stands and sees Sam and the neighborhood faithful screaming themselves hoarse, some last reserve opens inside him.',
-          'With three minutes remaining, chaos breaks in his favor. Leo reads a lazy pass, cuts across the lane, and steals the ball cleanly before accelerating down the wing. Two defenders converge. The old version of him might have forced the shot, desperate to be the hero alone, but this week has changed him. At the exact moment the closing angle disappears, he slips a perfect pass across the box to a teammate arriving unmarked. The finish slams home. 1-1.',
-          'Leo trusts instinct over logic. He launches sideways into the air, folding and striking the ball with a bicycle kick so clean it sounds like thunder. The shot tears toward the upper corner and crashes into the net beyond the goalkeeper’s reach. 2-1. Final whistle. Bedlam. Teammates swarm him, every old resentment erased in the violence of joy, and through the shifting bodies Leo finds Sam in the stands weeping openly with happiness.'
+        chapter: "Chapter 8",
+        number: "08",
+        title: "The Corner Strike",
+        subtitle: "Victorious ending",
+        summary: "The final chapter pays off every sacrifice with a match won through trust, grit, and one last impossible strike that finally opens the future.",
+        accent: "#ff2e63",
+        secondary: "#ffe34f",
+        tint: "rgba(255, 46, 99, 0.16)",
+        glow: "rgba(113, 234, 255, 0.22)",
+        pages: [
+          {
+            title: "The Final Burns",
+            hook: "The championship is every bit as punishing as the week that led into it, and Leo feels all of it in his legs from the first whistle.",
+            burst: "BAM!",
+            stamp: "Final Test",
+            heroType: "stadium-run",
+            leftType: "team-huddle",
+            rightType: "field-return",
+            heroTitle: "No Easy Ending",
+            heroCaption: "The opposing side is faster, fresher, and perfectly willing to grind every minute into a fight.",
+            leftTitle: "Hit After Hit",
+            leftCaption: "Every challenge reminds Leo that exhaustion does not disappear just because a bigger moment arrives.",
+            rightTitle: "Still in It",
+            rightCaption: "Even behind on the score, the page refuses to let hope flatten into panic.",
+            heroBubble: { label: "Narration", text: "Fairy tales rarely mention how heavy your legs feel in the eighty-fifth minute.", pos: "left-top" },
+            leftBubble: { label: "Opponent", text: "You're slower tonight.", pos: "right-top" },
+            rightBubble: { label: "Leo", text: "Maybe. Not finished though.", pos: "left-bottom" },
+            dialogueOne: "The body keeps asking for rest. The crowd keeps answering with belief.",
+            dialogueTwo: "Leo has less left than he wants, but more purpose than he has ever had before.",
+            focus: "The final begins by proving that the ending still has to be earned physically, not only emotionally.",
+            pulse: "The chapter opens in tension, not celebration.",
+            paragraphs: [
+              "The final starts badly and stays difficult. The opposing side is sharper in the tackle, faster to second balls, and disciplined enough to close every generous angle before it can become dangerous.",
+              "Leo feels the week in every sprint. His legs do not spring the way they usually do, and each recovery run costs more than the one before it.",
+              "When the opponents score first, the noise in the stadium dips into a frightened kind of hush. For a second, the match threatens to become exactly the kind of ending stories warn you about.",
+              "Then Leo glances toward the stands and sees Sam still on his feet, still shouting, still surrounded by people who came because they believe the family deserves a better ending than this."
+            ]
+          },
+          {
+            title: "The Smarter Choice",
+            hook: "With minutes remaining, Leo finally gets the opening the whole comic has been waiting for, and he uses it differently than the old version of himself would have.",
+            burst: "ZIP!",
+            stamp: "Trust First",
+            heroType: "equalizer-pass",
+            leftType: "stadium-run",
+            rightType: "team-huddle",
+            heroTitle: "He Doesn't Force It",
+            heroCaption: "Two defenders close him down, and the selfish hero shot flashes in front of him for half a heartbeat before disappearing.",
+            leftTitle: "Lane Opens",
+            leftCaption: "The lazy pass is all the invitation Leo needs to spring into the move.",
+            rightTitle: "The Equalizer",
+            rightCaption: "A perfect slip pass turns into the goal that pulls the whole final back to life.",
+            heroBubble: { label: "Leo", text: "Not me. Him. Now.", pos: "right-top" },
+            leftBubble: { label: "Teammate", text: "Across! Across!", pos: "left-top" },
+            rightBubble: { label: "Crowd", text: "YES!", pos: "left-bottom" },
+            dialogueOne: "The older version of Leo might have tried to write his name across the whole ending by himself.",
+            dialogueTwo: "This version has learned that trust can be just as heroic as spectacle.",
+            focus: "Leo's growth is proven through decision-making before the final kick ever arrives.",
+            pulse: "The match swings because Leo chooses maturity over ego.",
+            paragraphs: [
+              "With three minutes left, chaos finally tilts his way. Leo reads a tired pass, cuts across the lane, and steals it cleanly before driving down the wing with everything he has left.",
+              "Two defenders converge. The shot angle narrows almost at once. For the briefest instant, the old temptation rises: force the moment, take the glory, try to end the story alone.",
+              "Instead, Leo sees the better truth. He slips the ball across the box to a teammate arriving unmarked, and the finish slams home before the keeper can shift his weight.",
+              "The equalizer does more than tie the game. It restores oxygen to the entire stadium. It tells everyone watching that the final chapter still has another turn left in it."
+            ]
+          },
+          {
+            title: "The Corner Strike",
+            hook: "Once the score is level, instinct takes over and the match offers Leo one last impossible moment.",
+            burst: "KAPOW!",
+            stamp: "The Shot",
+            heroType: "final-kick",
+            leftType: "spotlight-player",
+            rightType: "goal-celebration",
+            heroTitle: "He Leaves the Ground",
+            heroCaption: "The ball hangs, the body folds, and a week of sacrifice seems to gather into one clean violent motion.",
+            leftTitle: "No Time to Think",
+            leftCaption: "There are moments when preparation takes over because thought would simply arrive too late.",
+            rightTitle: "The Net Breaks the Silence",
+            rightCaption: "The final strike crashes into the top corner like the answer to every fear the story raised.",
+            heroBubble: { label: "Leo", text: "Now.", pos: "right-top" },
+            leftBubble: { label: "Narration", text: "Instinct is what remains when logic can no longer keep pace.", pos: "left-top" },
+            rightBubble: { label: "Crowd", text: "KAPOW!", pos: "left-bottom" },
+            dialogueOne: "The bicycle kick works because Leo trusts his body even after a week that gave him every reason not to.",
+            dialogueTwo: "It is not magic. It is courage arriving on time.",
+            focus: "The comic's title moment lands with full emotional and visual payoff.",
+            pulse: "Energy peaks in one explosive panel sequence.",
+            paragraphs: [
+              "The ball comes back into the area after a deflection, high and slightly behind him. There is no time to set, no time to explain, no time to ask whether his legs have enough left for one last impossible demand.",
+              "Leo trusts instinct over logic. He throws himself sideways, folds in the air, and strikes through the ball with a bicycle kick so clean it sounds like the page itself cracking in half.",
+              "The shot tears toward the upper corner and disappears beyond the goalkeeper's reach. For a fraction of a second, the stadium is too stunned to make noise.",
+              "Then the net bulges, the whistle follows, and bedlam begins."
+            ]
+          },
+          {
+            title: "Open Future",
+            hook: "The story closes not only with victory, but with forgiveness, relief, and the sense that the future can finally be entered instead of just imagined.",
+            burst: "ROAR!",
+            stamp: "Tomorrow",
+            heroType: "victory-crowd",
+            leftType: "community-rally",
+            rightType: "scholarship-letter",
+            heroTitle: "The Whole City Lifts",
+            heroCaption: "Teammates swarm him, old resentment dissolves, and through the blur Leo finds Sam in the stands crying openly with joy.",
+            leftTitle: "Nobody Wins Alone",
+            leftCaption: "The neighborhood's support and the team's embrace complete the lesson the whole comic has been building toward.",
+            rightTitle: "What the Goal Opens",
+            rightCaption: "The scholarship, the store, the family, the team. None of it is solved by one kick, but all of it becomes possible again.",
+            heroBubble: { label: "Sam", text: "That's my son!", pos: "left-bottom" },
+            leftBubble: { label: "Teammate", text: "We got you. We got this.", pos: "right-top" },
+            rightBubble: { label: "Narration", text: "The future is not guaranteed. It is finally open.", pos: "right-bottom" },
+            dialogueOne: "Victory matters most here not because it is glamorous, but because it arrives after sacrifice instead of replacing it.",
+            dialogueTwo: "The ending honors the whole week by letting joy and hardship share the same final frame.",
+            focus: "Leo becomes complete here: athlete, son, teammate, and symbol of a community that refused to let one family fall.",
+            pulse: "The chapter closes in earned release and wide-open possibility.",
+            paragraphs: [
+              "Teammates crash into Leo from every direction. The same people who resented him hours ago are now shouting into his shoulders, laughing against his neck, dragging him upright into the kind of collective joy that erases old distances fast.",
+              "In the stands, Sam is crying without embarrassment, one arm around a neighbor and the other raised toward the field as if he still cannot quite believe what he has just seen.",
+              "Somewhere beyond this page, the scout will make her call. Somewhere beyond it, the store will still need saving, and real life will still demand more than one game can settle. But the emotional truth has changed completely.",
+              "The final frame of the story is not perfection. It is possibility. Leo finally stands inside a future that feels open, and for the first time he does not have to imagine stepping into it alone."
+            ]
+          }
         ]
       }
     ];
 
-    const chapterList = document.getElementById('chapterList');
-    const searchToggle = document.getElementById('searchToggle');
-    const searchBox = document.getElementById('searchBox');
-    const chapterSearch = document.getElementById('chapterSearch');
-    const homeBtn = document.getElementById('homeBtn');
+    const chaptersRoot = document.getElementById("chapters");
+    const chapterList = document.getElementById("chapterList");
+    const chapterSearch = document.getElementById("chapterSearch");
+    const searchToggle = document.getElementById("searchToggle");
+    const searchBox = document.getElementById("searchBox");
+    const homeBtn = document.getElementById("homeBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const autoBtn = document.getElementById("autoBtn");
+    const printBtn = document.getElementById("printBtn");
 
-    const miniTitle = document.getElementById('miniTitle');
-    const mainTitle = document.getElementById('mainTitle');
-    const chapterTitle = document.getElementById('chapterTitle');
-    const panelNumber = document.getElementById('panelNumber');
-    const storyText = document.getElementById('storyText');
-    const characterFocus = document.getElementById('characterFocus');
-    const chapterPulse = document.getElementById('chapterPulse');
-    const progressBar = document.getElementById('progressBar');
-    const progressCount = document.getElementById('progressCount');
-    const subtitleLabel = document.getElementById('subtitleLabel');
-
-    let currentScene = 0;
     let autoPlay = null;
+    let currentPageIndex = 0;
+    let activeFilter = "";
 
-    function buildChapterList(filter = '') {
-      const f = filter.trim().toLowerCase();
-      chapterList.innerHTML = scenes.map((scene, index) => {
-        const match = !f || scene.title.toLowerCase().includes(f) || scene.subtitle.toLowerCase().includes(f) || scene.chapter.toLowerCase().includes(f);
+    function svgDataUri(svg) {
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function makeStars(count, width, height, fill, opacity = 0.18) {
+      return Array.from({ length: count }, (_, index) => {
+        const x = ((index * 73) % width) + 12;
+        const y = ((index * 47) % height) + 18;
+        const r = (index % 4) + 2;
+        return `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" opacity="${opacity}" />`;
+      }).join("");
+    }
+
+    function makeCrowd(width, baseY, accent) {
+      return Array.from({ length: 14 }, (_, index) => {
+        const x = 22 + index * (width / 14);
+        const headY = baseY - 38 - (index % 3) * 5;
+        const bodyH = 52 + (index % 4) * 8;
         return `
-          <button class="chapter-chip ${index === currentScene ? 'active' : ''}" data-index="${index}" style="display:${match ? 'block' : 'none'}">
-            <strong>${scene.chapter}</strong>
-            <span>${scene.title}</span>
-          </button>
+          <circle cx="${x}" cy="${headY}" r="14" fill="#111111" />
+          <path d="M ${x - 22} ${headY + 14} Q ${x} ${headY - 10} ${x + 22} ${headY + 14} L ${x + 30} ${headY + bodyH} L ${x - 30} ${headY + bodyH} Z" fill="#111111" />
+          <rect x="${x - 12}" y="${headY + 40}" width="24" height="14" rx="3" fill="${accent}" opacity="0.8" />
         `;
-      }).join('');
-      chapterList.querySelectorAll('[data-index]').forEach(btn => {
-        btn.addEventListener('click', () => updateScene(Number(btn.dataset.index)));
+      }).join("");
+    }
+
+    function makeRain(width, height) {
+      return Array.from({ length: 28 }, (_, index) => {
+        const x = 18 + (index * 39) % width;
+        const y = 10 + (index * 57) % height;
+        return `<line x1="${x}" y1="${y}" x2="${x - 24}" y2="${y + 56}" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round" />`;
+      }).join("");
+    }
+
+    function renderPanelArt(type, palette, isHero) {
+      const width = isHero ? 1200 : 760;
+      const height = isHero ? 470 : 330;
+      const accent = palette.accent;
+      const secondary = palette.secondary;
+      const tint = palette.tint;
+      const glow = palette.glow;
+
+      const defs = `
+        <linearGradient id="skyA" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="${secondary}" />
+          <stop offset="50%" stop-color="#ffffff" />
+          <stop offset="100%" stop-color="${accent}" />
+        </linearGradient>
+        <linearGradient id="nightA" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#34558e" />
+          <stop offset="56%" stop-color="#1c2741" />
+          <stop offset="100%" stop-color="#111111" />
+        </linearGradient>
+        <linearGradient id="warmA" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#fff0af" />
+          <stop offset="52%" stop-color="#ffbb69" />
+          <stop offset="100%" stop-color="${accent}" />
+        </linearGradient>
+      `;
+
+      let art = `
+        <rect width="${width}" height="${height}" fill="url(#skyA)" />
+        <rect width="${width}" height="${height}" fill="${glow}" opacity="0.26" />
+        ${makeStars(18, width, height, "#ffffff")}
+      `;
+
+      switch (type) {
+        case "stadium-win":
+        case "goal-celebration":
+        case "victory-crowd":
+          art += `
+            <rect width="${width}" height="${height}" fill="url(#nightA)" />
+            <rect y="${height * 0.72}" width="${width}" height="${height * 0.28}" fill="#2bb86f" />
+            ${makeCrowd(width, height * 0.85, accent)}
+            <circle cx="${width * 0.55}" cy="${height * 0.28}" r="20" fill="#ffffff" stroke="#111111" stroke-width="5" />
+            <circle cx="${width * 0.48}" cy="${height * 0.38}" r="26" fill="#111111" />
+            <path d="M ${width * 0.42} ${height * 0.61} L ${width * 0.48} ${height * 0.42} L ${width * 0.55} ${height * 0.6} L ${width * 0.53} ${height * 0.78} L ${width * 0.43} ${height * 0.78} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+            <line x1="${width * 0.46}" y1="${height * 0.48}" x2="${width * 0.33}" y2="${height * 0.35}" stroke="#111111" stroke-width="14" stroke-linecap="round" />
+            <line x1="${width * 0.52}" y1="${height * 0.48}" x2="${width * 0.66}" y2="${height * 0.32}" stroke="#111111" stroke-width="14" stroke-linecap="round" />
+            <line x1="${width * 0.46}" y1="${height * 0.76}" x2="${width * 0.35}" y2="${height * 0.92}" stroke="#111111" stroke-width="16" stroke-linecap="round" />
+            <line x1="${width * 0.52}" y1="${height * 0.76}" x2="${width * 0.64}" y2="${height * 0.9}" stroke="#111111" stroke-width="16" stroke-linecap="round" />
+            <path d="M ${width * 0.73} ${height * 0.28} L ${width * 0.86} ${height * 0.28} L ${width * 0.86} ${height * 0.44} L ${width * 0.73} ${height * 0.44} Z" fill="none" stroke="#ffffff" stroke-width="8" />
+          `;
+          break;
+        case "stadium-run":
+        case "field-return":
+        case "spotlight-player":
+        case "equalizer-pass":
+        case "final-kick":
+          art += `
+            <rect width="${width}" height="${height}" fill="url(#nightA)" />
+            <rect y="${height * 0.74}" width="${width}" height="${height * 0.26}" fill="#28aa67" />
+            ${makeCrowd(width, height * 0.86, accent)}
+            <circle cx="${width * 0.63}" cy="${height * 0.36}" r="16" fill="#ffffff" stroke="#111111" stroke-width="4" />
+            <circle cx="${width * 0.4}" cy="${height * 0.34}" r="24" fill="#111111" />
+            <path d="M ${width * 0.34} ${height * 0.58} L ${width * 0.4} ${height * 0.4} L ${width * 0.46} ${height * 0.57} L ${width * 0.44} ${height * 0.75} L ${width * 0.35} ${height * 0.76} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+            <line x1="${width * 0.41}" y1="${height * 0.46}" x2="${width * 0.29}" y2="${height * 0.54}" stroke="#111111" stroke-width="14" stroke-linecap="round" />
+            <line x1="${width * 0.44}" y1="${height * 0.46}" x2="${width * 0.55}" y2="${height * 0.4}" stroke="#111111" stroke-width="14" stroke-linecap="round" />
+            <line x1="${width * 0.39}" y1="${height * 0.74}" x2="${width * 0.33}" y2="${height * 0.92}" stroke="#111111" stroke-width="16" stroke-linecap="round" />
+            <line x1="${width * 0.44}" y1="${height * 0.74}" x2="${width * 0.57}" y2="${height * 0.84}" stroke="#111111" stroke-width="16" stroke-linecap="round" />
+          `;
+          break;
+        case "crowd-wave":
+        case "community-rally":
+        case "sign-crowd":
+        case "hallway-hype":
+        case "team-huddle":
+          art += `
+            <rect width="${width}" height="${height}" fill="#244057" />
+            <rect y="${height * 0.74}" width="${width}" height="${height * 0.26}" fill="${secondary}" opacity="0.2" />
+            ${makeCrowd(width, height * 0.88, accent)}
+            ${Array.from({ length: 8 }, (_, i) => {
+              const x = 60 + i * 80;
+              const y = 60 + (i % 3) * 24;
+              return `<rect x="${x}" y="${y}" width="68" height="36" rx="6" fill="${i % 2 ? secondary : "#ffffff"}" stroke="#111111" stroke-width="6" />`;
+            }).join("")}
+          `;
+          break;
+        case "city-walk":
+        case "night-window":
+          art += `
+            <rect width="${width}" height="${height}" fill="#23304e" />
+            <rect y="${height * 0.76}" width="${width}" height="${height * 0.24}" fill="#34425c" />
+            ${Array.from({ length: 10 }, (_, i) => {
+              const x = 20 + i * 70;
+              const h = 80 + (i % 4) * 25;
+              return `<rect x="${x}" y="${height * 0.76 - h}" width="48" height="${h}" fill="#111111" />`;
+            }).join("")}
+            ${Array.from({ length: 26 }, (_, i) => {
+              const x = 28 + (i * 31) % width;
+              const y = 40 + (i * 17) % (height * 0.45);
+              return `<rect x="${x}" y="${y}" width="10" height="14" fill="${i % 2 ? secondary : "#ffffff"}" opacity="0.75" />`;
+            }).join("")}
+          `;
+          break;
+        case "store-front":
+        case "store-close":
+          art += `
+            <rect width="${width}" height="${height}" fill="#ffe5a8" />
+            <rect y="${height * 0.8}" width="${width}" height="${height * 0.2}" fill="#bd8650" />
+            <rect x="${width * 0.12}" y="${height * 0.2}" width="${width * 0.76}" height="${height * 0.52}" rx="24" fill="#fffaf0" stroke="#111111" stroke-width="10" />
+            <rect x="${width * 0.17}" y="${height * 0.24}" width="${width * 0.66}" height="52" fill="${accent}" stroke="#111111" stroke-width="8" />
+            <rect x="${width * 0.22}" y="${height * 0.38}" width="${width * 0.22}" height="${height * 0.24}" fill="#7fdcff" stroke="#111111" stroke-width="8" />
+            <rect x="${width * 0.49}" y="${height * 0.34}" width="${width * 0.16}" height="${height * 0.28}" fill="#7fdcff" stroke="#111111" stroke-width="8" />
+            <rect x="${width * 0.7}" y="${height * 0.38}" width="${width * 0.12}" height="${height * 0.24}" fill="#fff0b2" stroke="#111111" stroke-width="8" />
+          `;
+          break;
+        case "grocery-shelves":
+        case "work-grind":
+          art += `
+            <rect width="${width}" height="${height}" fill="#fff2d0" />
+            <rect y="${height * 0.84}" width="${width}" height="${height * 0.16}" fill="#d3a06c" />
+            ${[0.1, 0.38, 0.66].map((x) => `
+              <rect x="${width * x}" y="${height * 0.14}" width="${width * 0.2}" height="${height * 0.62}" fill="#ffffff" stroke="#111111" stroke-width="8" />
+              ${Array.from({ length: 4 }, (_, i) => `
+                <rect x="${width * x + 14}" y="${height * (0.18 + i * 0.15)}" width="${width * 0.17}" height="10" fill="#111111" opacity="0.12" />
+                ${Array.from({ length: 5 }, (_, j) => `<rect x="${width * x + 22 + j * 36}" y="${height * (0.22 + i * 0.15)}" width="24" height="52" rx="6" fill="${j % 2 ? accent : secondary}" />`).join("")}
+              `).join("")}
+            `).join("")}
+          `;
+          break;
+        case "kitchen-hug":
+          art += `
+            <rect width="${width}" height="${height}" fill="url(#warmA)" />
+            <rect x="${width * 0.1}" y="${height * 0.18}" width="${width * 0.8}" height="${height * 0.66}" rx="26" fill="#fffaf0" opacity="0.36" />
+            <rect x="${width * 0.16}" y="${height * 0.66}" width="${width * 0.68}" height="${height * 0.14}" rx="14" fill="#a66e3f" />
+            <circle cx="${width * 0.42}" cy="${height * 0.36}" r="24" fill="#111111" />
+            <circle cx="${width * 0.56}" cy="${height * 0.34}" r="25" fill="#111111" />
+            <path d="M ${width * 0.36} ${height * 0.64} L ${width * 0.42} ${height * 0.42} L ${width * 0.47} ${height * 0.62} L ${width * 0.46} ${height * 0.8} L ${width * 0.37} ${height * 0.8} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+            <path d="M ${width * 0.51} ${height * 0.64} L ${width * 0.56} ${height * 0.42} L ${width * 0.63} ${height * 0.61} L ${width * 0.62} ${height * 0.8} L ${width * 0.52} ${height * 0.8} Z" fill="${secondary}" stroke="#111111" stroke-width="8" />
+            <line x1="${width * 0.46}" y1="${height * 0.52}" x2="${width * 0.54}" y2="${height * 0.52}" stroke="#111111" stroke-width="14" stroke-linecap="round" />
+          `;
+          break;
+        case "scout-office":
+        case "coach-office":
+        case "chalkboard-plan":
+        case "scholarship-letter":
+          art += `
+            <rect width="${width}" height="${height}" fill="#f8efff" />
+            <rect x="${width * 0.08}" y="${height * 0.14}" width="${width * 0.84}" height="${height * 0.7}" rx="28" fill="#ffffff" stroke="#111111" stroke-width="10" />
+            <rect x="${width * 0.16}" y="${height * 0.54}" width="${width * 0.68}" height="${height * 0.12}" rx="14" fill="#7b533c" />
+            <rect x="${width * 0.52}" y="${height * 0.36}" width="${width * 0.17}" height="${height * 0.1}" rx="10" fill="${secondary}" stroke="#111111" stroke-width="6" transform="rotate(-10 ${width * 0.6} ${height * 0.41})" />
+            <circle cx="${width * 0.3}" cy="${height * 0.34}" r="24" fill="#111111" />
+            <path d="M ${width * 0.24} ${height * 0.6} L ${width * 0.3} ${height * 0.4} L ${width * 0.36} ${height * 0.6} L ${width * 0.35} ${height * 0.78} L ${width * 0.25} ${height * 0.78} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+            <circle cx="${width * 0.74}" cy="${height * 0.3}" r="22" fill="#111111" />
+            <path d="M ${width * 0.69} ${height * 0.56} L ${width * 0.74} ${height * 0.36} L ${width * 0.8} ${height * 0.56} L ${width * 0.79} ${height * 0.76} L ${width * 0.7} ${height * 0.76} Z" fill="#ffffff" stroke="#111111" stroke-width="8" />
+          `;
+          break;
+        case "office-truth":
+        case "red-notice":
+          art += `
+            <rect width="${width}" height="${height}" fill="#1b2234" />
+            <rect x="${width * 0.12}" y="${height * 0.18}" width="${width * 0.76}" height="${height * 0.64}" rx="26" fill="#2a3248" stroke="#111111" stroke-width="10" />
+            <rect x="${width * 0.26}" y="${height * 0.56}" width="${width * 0.48}" height="${height * 0.12}" rx="16" fill="#6d4f3d" />
+            <rect x="${width * 0.5}" y="${height * 0.36}" width="${width * 0.18}" height="${height * 0.14}" fill="#fff9ef" stroke="#111111" stroke-width="6" transform="rotate(-8 ${width * 0.59} ${height * 0.43})" />
+            <rect x="${width * 0.52}" y="${height * 0.39}" width="${width * 0.11}" height="16" fill="${accent}" />
+            <circle cx="${width * 0.37}" cy="${height * 0.34}" r="24" fill="#111111" />
+            <path d="M ${width * 0.31} ${height * 0.62} L ${width * 0.37} ${height * 0.4} L ${width * 0.43} ${height * 0.61} L ${width * 0.41} ${height * 0.8} L ${width * 0.32} ${height * 0.8} Z" fill="#9a9a9a" stroke="#111111" stroke-width="8" />
+          `;
+          break;
+        case "crate-load":
+        case "delivery-bike":
+          art += `
+            <rect width="${width}" height="${height}" fill="#efffe8" />
+            <rect y="${height * 0.78}" width="${width}" height="${height * 0.22}" fill="#c98f5d" />
+            <rect x="${width * 0.1}" y="${height * 0.2}" width="${width * 0.24}" height="${height * 0.3}" rx="18" fill="#fffdf6" stroke="#111111" stroke-width="8" />
+            ${Array.from({ length: 6 }, (_, i) => `<rect x="${width * 0.12 + (i % 3) * 62}" y="${height * 0.24 + Math.floor(i / 3) * 76}" width="44" height="52" rx="6" fill="${i % 2 ? accent : secondary}" />`).join("")}
+            <circle cx="${width * 0.72}" cy="${height * 0.8}" r="24" fill="none" stroke="#111111" stroke-width="8" />
+            <circle cx="${width * 0.85}" cy="${height * 0.8}" r="24" fill="none" stroke="#111111" stroke-width="8" />
+            <line x1="${width * 0.72}" y1="${height * 0.8}" x2="${width * 0.79}" y2="${height * 0.68}" stroke="#111111" stroke-width="8" />
+            <line x1="${width * 0.79}" y1="${height * 0.68}" x2="${width * 0.85}" y2="${height * 0.8}" stroke="#111111" stroke-width="8" />
+            <circle cx="${width * 0.79}" cy="${height * 0.38}" r="24" fill="#111111" />
+            <path d="M ${width * 0.73} ${height * 0.66} L ${width * 0.79} ${height * 0.44} L ${width * 0.85} ${height * 0.65} L ${width * 0.84} ${height * 0.82} L ${width * 0.74} ${height * 0.82} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+          `;
+          break;
+        case "rain-street":
+        case "storm-fall":
+        case "umbrella-reach":
+          art += `
+            <rect width="${width}" height="${height}" fill="#29375d" />
+            <rect y="${height * 0.78}" width="${width}" height="${height * 0.22}" fill="#364559" />
+            ${makeRain(width, height)}
+            <path d="M ${width * 0.66} ${height * 0.26} Q ${width * 0.74} ${height * 0.08} ${width * 0.84} ${height * 0.26}" fill="none" stroke="#111111" stroke-width="14" stroke-linecap="round" />
+            <line x1="${width * 0.75}" y1="${height * 0.12}" x2="${width * 0.75}" y2="${height * 0.56}" stroke="#111111" stroke-width="8" />
+            <circle cx="${width * 0.5}" cy="${height * 0.42}" r="22" fill="#111111" />
+            <path d="M ${width * 0.44} ${height * 0.66} L ${width * 0.5} ${height * 0.46} L ${width * 0.56} ${height * 0.64} L ${width * 0.54} ${height * 0.82} L ${width * 0.45} ${height * 0.82} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+          `;
+          break;
+        case "empty-field":
+          art += `
+            <rect width="${width}" height="${height}" fill="url(#nightA)" />
+            <rect y="${height * 0.76}" width="${width}" height="${height * 0.24}" fill="#2ab46d" />
+            <line x1="${width * 0.15}" y1="${height * 0.78}" x2="${width * 0.85}" y2="${height * 0.78}" stroke="rgba(255,255,255,0.45)" stroke-width="8" />
+            <circle cx="${width * 0.5}" cy="${height * 0.78}" r="18" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="8" />
+          `;
+          break;
+        case "phone-glow":
+          art += `
+            <rect width="${width}" height="${height}" fill="#1b2235" />
+            <rect x="${width * 0.33}" y="${height * 0.12}" width="${width * 0.34}" height="${height * 0.72}" rx="24" fill="#111111" stroke="#ffffff" stroke-width="6" />
+            <rect x="${width * 0.37}" y="${height * 0.19}" width="${width * 0.26}" height="${height * 0.56}" rx="12" fill="#9ce9ff" />
+            ${Array.from({ length: 4 }, (_, i) => `<rect x="${width * 0.41}" y="${height * (0.26 + i * 0.11)}" width="${width * 0.18}" height="18" rx="8" fill="${i % 2 ? accent : secondary}" opacity="0.8" />`).join("")}
+          `;
+          break;
+        case "trophy-dream":
+          art += `
+            <rect width="${width}" height="${height}" fill="#fff1bf" />
+            <circle cx="${width * 0.52}" cy="${height * 0.28}" r="80" fill="${secondary}" opacity="0.55" />
+            <path d="M ${width * 0.46} ${height * 0.2} L ${width * 0.58} ${height * 0.2} L ${width * 0.56} ${height * 0.54} L ${width * 0.48} ${height * 0.54} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+            <rect x="${width * 0.44}" y="${height * 0.54}" width="${width * 0.16}" height="${height * 0.08}" fill="#111111" />
+            <rect x="${width * 0.38}" y="${height * 0.64}" width="${width * 0.28}" height="${height * 0.08}" fill="#ffffff" stroke="#111111" stroke-width="8" />
+          `;
+          break;
+        case "tunnel-walk":
+          art += `
+            <rect width="${width}" height="${height}" fill="#1f2944" />
+            <path d="M ${width * 0.18} ${height} L ${width * 0.38} ${height * 0.18} L ${width * 0.62} ${height * 0.18} L ${width * 0.82} ${height} Z" fill="#303d63" />
+            <rect x="${width * 0.42}" y="${height * 0.2}" width="${width * 0.16}" height="${height * 0.7}" fill="#fff7c7" opacity="0.8" />
+            <circle cx="${width * 0.5}" cy="${height * 0.44}" r="22" fill="#111111" />
+            <path d="M ${width * 0.44} ${height * 0.72} L ${width * 0.5} ${height * 0.48} L ${width * 0.56} ${height * 0.72} L ${width * 0.55} ${height * 0.88} L ${width * 0.45} ${height * 0.88} Z" fill="${accent}" stroke="#111111" stroke-width="8" />
+          `;
+          break;
+        default:
+          art += `<rect width="${width}" height="${height}" fill="${secondary}" />`;
+      }
+
+      return svgDataUri(`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}">
+          <defs>${defs}</defs>
+          <rect width="${width}" height="${height}" fill="#ffffff" />
+          ${art}
+          <rect x="12" y="12" width="${width - 24}" height="${height - 24}" rx="22" fill="none" stroke="${tint}" stroke-width="12" />
+        </svg>
+      `);
+    }
+
+    function createSpeech(bubble) {
+      return `
+        <div class="speech ${bubble.pos}">
+          <div class="speech-label">${bubble.label}</div>
+          <p>${bubble.text}</p>
+        </div>
+      `;
+    }
+
+    function renderImagePanel(page, chapter, role) {
+      const isHero = role === "hero";
+      const title = role === "hero" ? page.heroTitle : role === "left" ? page.leftTitle : page.rightTitle;
+      const caption = role === "hero" ? page.heroCaption : role === "left" ? page.leftCaption : page.rightCaption;
+      const type = role === "hero" ? page.heroType : role === "left" ? page.leftType : page.rightType;
+      const bubble = role === "hero" ? page.heroBubble : role === "left" ? page.leftBubble : page.rightBubble;
+      const stamp = `<div class="stamp"><strong>#${chapter.number}</strong><span>${page.stamp}</span></div>`;
+      return `
+        <section class="${isHero ? "hero-panel" : "mid-panel"}">
+          <img src="${renderPanelArt(type, chapter, isHero)}" alt="${chapter.title} ${page.title} illustrated ${role} panel" />
+          <div class="panel-overlay"></div>
+          ${createSpeech(bubble)}
+          <div class="panel-copy">
+            <div>
+              <div class="panel-tag">${isHero ? chapter.subtitle : role === "left" ? "Support Panel" : "Impact Panel"}</div>
+              <h3 class="${isHero ? "hero-title" : "mid-title"}">${title}</h3>
+            </div>
+            ${isHero ? stamp : `<div class="caption-box"><p>${caption}</p></div>`}
+          </div>
+        </section>
+      `;
+    }
+
+    function createStorySequence(page, chapter) {
+      const beatTypes = [page.heroType, page.leftType, page.rightType, page.heroType];
+      return `
+        <div class="story-sequence">
+          ${page.paragraphs.map((paragraph, index) => `
+            <article class="story-strip">
+              <div class="story-thumb">
+                <img src="${renderPanelArt(beatTypes[index % beatTypes.length], chapter, false)}" alt="${page.title} beat ${index + 1} illustration" />
+              </div>
+              <div class="story-copy-card">
+                <div class="beat-tag">Beat ${index + 1}</div>
+                <p>${paragraph}</p>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function createPage(chapter, page, chapterIndex, pageIndex, globalIndex, totalPages) {
+      return `
+        <article
+          class="comic-paper page-enter"
+          id="page-${globalIndex + 1}"
+          data-page-index="${globalIndex}"
+          data-chapter-index="${chapterIndex}"
+          style="--page-accent:${chapter.accent};--page-secondary:${chapter.secondary};--page-tint:${chapter.tint};--page-glow:${chapter.glow};"
+        >
+          <header class="paper-head">
+            <div class="head-copy">
+              <div class="paper-id">${chapter.chapter} - Page ${pageIndex + 1} of ${chapter.pages.length}</div>
+              <h2 class="paper-title">${page.title}</h2>
+              <p class="hook">${page.hook}</p>
+            </div>
+            <div class="burst">${page.burst}</div>
+          </header>
+
+          <div class="hero-wrap">
+            ${renderImagePanel(page, chapter, "hero")}
+          </div>
+
+          <div class="mid-wrap">
+            ${renderImagePanel(page, chapter, "left")}
+            ${renderImagePanel(page, chapter, "right")}
+          </div>
+
+          <div class="bottom-wrap">
+            <section class="script-panel">
+              <div class="script-top">
+                <div>
+                  <div class="meta-label">Script Beat</div>
+                  <h3>${page.title}</h3>
+                </div>
+                <div class="page-number">${chapter.number}-${pageIndex + 1}</div>
+              </div>
+
+              <div class="bubble-row">
+                <article class="bubble-card">
+                  <div class="meta-label">Narration</div>
+                  <p>${page.dialogueOne}</p>
+                </article>
+                <article class="bubble-card alt">
+                  <div class="meta-label">Inner Voice</div>
+                  <p>${page.dialogueTwo}</p>
+                </article>
+              </div>
+
+              ${createStorySequence(page, chapter)}
+            </section>
+
+            <section class="notes-panel">
+              <article class="meta-card">
+                <div class="meta-label">Character Focus</div>
+                <p>${page.focus}</p>
+              </article>
+              <article class="meta-card note">
+                <div class="meta-label">Page Pulse</div>
+                <p>${page.pulse}</p>
+              </article>
+              <article class="meta-card">
+                <div class="progress-row">
+                  <span>Issue Progress</span>
+                  <span>${globalIndex + 1} / ${totalPages}</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill" style="width:${((globalIndex + 1) / totalPages) * 100}%"></div>
+                </div>
+              </article>
+            </section>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderChapters() {
+      const totalPages = chapters.reduce((sum, chapter) => sum + chapter.pages.length, 0);
+      let globalIndex = 0;
+      chaptersRoot.innerHTML = chapters
+        .map((chapter, chapterIndex) => {
+          const pagesHtml = chapter.pages
+            .map((page, pageIndex) => {
+              const html = createPage(chapter, page, chapterIndex, pageIndex, globalIndex, totalPages);
+              globalIndex += 1;
+              return html;
+            })
+            .join("");
+
+          return `
+            <section
+              class="chapter-block"
+              id="chapter-${chapterIndex + 1}"
+              data-chapter-index="${chapterIndex}"
+              data-search="${`${chapter.chapter} ${chapter.title} ${chapter.subtitle} ${chapter.summary} ${chapter.pages.map((page) => `${page.title} ${page.hook} ${page.focus}`).join(" ")}`.toLowerCase()}"
+            >
+              <div class="chapter-intro">
+                <h2>${chapter.chapter}: ${chapter.title}</h2>
+                <p>${chapter.summary}</p>
+              </div>
+              <div class="chapter-pages">
+                ${pagesHtml}
+              </div>
+            </section>
+          `;
+        })
+        .join("");
+    }
+
+    function allPages() {
+      return Array.from(document.querySelectorAll(".comic-paper"));
+    }
+
+    function visiblePages() {
+      return allPages().filter((page) => !page.closest(".chapter-block").classList.contains("hidden"));
+    }
+
+    function pageByIndex(index) {
+      return document.querySelector(`.comic-paper[data-page-index="${index}"]`);
+    }
+
+    function buildChapterList(filter = "") {
+      const query = filter.trim().toLowerCase();
+      activeFilter = query;
+
+      const matchingChapters = chapters.filter((chapter, chapterIndex) => {
+        const block = document.querySelector(`.chapter-block[data-chapter-index="${chapterIndex}"]`);
+        const haystack = block ? block.dataset.search : "";
+        const ok = !query || haystack.includes(query);
+        if (block) {
+          block.classList.toggle("hidden", !ok);
+        }
+        return ok;
+      });
+
+      if (!matchingChapters.length) {
+        chapterList.innerHTML = '<div class="empty-state">No chapter matches that search.</div>';
+        return;
+      }
+
+      chapterList.innerHTML = chapters
+        .map((chapter, chapterIndex) => {
+          const block = document.querySelector(`.chapter-block[data-chapter-index="${chapterIndex}"]`);
+          const hidden = block && block.classList.contains("hidden");
+          if (hidden) {
+            return "";
+          }
+          return `
+            <button class="chapter-chip ${chapterIndex === currentVisibleChapter() ? "active" : ""}" data-chapter-index="${chapterIndex}" type="button">
+              <strong>${chapter.chapter}</strong>
+              <span>${chapter.title} · ${chapter.pages.length} pages</span>
+            </button>
+          `;
+        })
+        .join("");
+
+      chapterList.querySelectorAll("[data-chapter-index]").forEach((button) => {
+        button.addEventListener("click", () => scrollToChapter(Number(button.dataset.chapterIndex)));
       });
     }
 
-    function updateScene(index) {
-      currentScene = index;
-      const scene = scenes[index];
-      miniTitle.textContent = scene.subtitle;
-      mainTitle.textContent = scene.title;
-      chapterTitle.textContent = scene.title;
-      subtitleLabel.textContent = scene.subtitle;
-      panelNumber.textContent = scene.number;
-      characterFocus.textContent = scene.focus;
-      chapterPulse.textContent = scene.pulse;
-      progressBar.style.width = `${((index + 1) / scenes.length) * 100}%`;
-      progressCount.textContent = `${index + 1} / ${scenes.length}`;
-      storyText.innerHTML = scene.paragraphs.map(p => `<p>${p}</p>`).join('');
-      [document.getElementById('chapterHead'), storyText, characterFocus.parentElement, chapterPulse.parentElement].forEach(el => {
-        el.classList.remove('fade-up');
-        void el.offsetWidth;
-        el.classList.add('fade-up');
-      });
-      buildChapterList(chapterSearch.value);
+    function currentVisibleChapter() {
+      const currentPage = pageByIndex(currentPageIndex);
+      if (!currentPage) {
+        return 0;
+      }
+      return Number(currentPage.dataset.chapterIndex);
     }
 
-    function nextScene() { updateScene((currentScene + 1) % scenes.length); }
-    function previousScene() { updateScene((currentScene - 1 + scenes.length) % scenes.length); }
+    function scrollToChapter(chapterIndex) {
+      const firstPage = document.querySelector(`.chapter-block[data-chapter-index="${chapterIndex}"]:not(.hidden) .comic-paper`);
+      if (!firstPage) {
+        return;
+      }
+      currentPageIndex = Number(firstPage.dataset.pageIndex);
+      buildChapterList(activeFilter);
+      firstPage.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
-    document.getElementById('nextBtn').addEventListener('click', nextScene);
-    document.getElementById('prevBtn').addEventListener('click', previousScene);
-    homeBtn.addEventListener('click', () => updateScene(0));
+    function stepPage(direction) {
+      const visible = visiblePages();
+      if (!visible.length) {
+        return;
+      }
+      const currentVisibleIndex = visible.findIndex((page) => Number(page.dataset.pageIndex) === currentPageIndex);
+      const nextVisibleIndex = currentVisibleIndex === -1
+        ? 0
+        : (currentVisibleIndex + direction + visible.length) % visible.length;
+      const nextPage = visible[nextVisibleIndex];
+      currentPageIndex = Number(nextPage.dataset.pageIndex);
+      buildChapterList(activeFilter);
+      nextPage.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
-    searchToggle.addEventListener('click', () => {
-      searchBox.classList.toggle('open');
-      if (searchBox.classList.contains('open')) chapterSearch.focus();
-    });
+    function setupObserver() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const current = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!current) {
+            return;
+          }
+          currentPageIndex = Number(current.target.dataset.pageIndex);
+          buildChapterList(activeFilter);
+        },
+        { threshold: [0.35, 0.6] }
+      );
 
-    chapterSearch.addEventListener('input', () => buildChapterList(chapterSearch.value));
+      allPages().forEach((page) => observer.observe(page));
+    }
 
-    document.getElementById('autoBtn').addEventListener('click', function () {
-      if (autoPlay) {
-        clearInterval(autoPlay);
-        autoPlay = null;
-        this.textContent = 'Auto Play';
-      } else {
-        autoPlay = setInterval(nextScene, 6500);
-        this.textContent = 'Stop Auto';
+    renderChapters();
+    buildChapterList();
+    setupObserver();
+
+    homeBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    searchToggle.addEventListener("click", () => {
+      searchBox.classList.toggle("open");
+      if (searchBox.classList.contains("open")) {
+        chapterSearch.focus();
       }
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') nextScene();
-      if (e.key === 'ArrowLeft') previousScene();
+    chapterSearch.addEventListener("input", () => buildChapterList(chapterSearch.value));
+
+    prevBtn.addEventListener("click", () => stepPage(-1));
+    nextBtn.addEventListener("click", () => stepPage(1));
+
+    autoBtn.addEventListener("click", function () {
+      if (autoPlay) {
+        clearInterval(autoPlay);
+        autoPlay = null;
+        this.textContent = "Auto Flip";
+        this.classList.remove("active");
+        return;
+      }
+      autoPlay = setInterval(() => stepPage(1), 7000);
+      this.textContent = "Stop Flip";
+      this.classList.add("active");
     });
 
-    updateScene(0);
+    printBtn.addEventListener("click", () => window.print());
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        stepPage(1);
+      }
+      if (event.key === "ArrowLeft") {
+        stepPage(-1);
+      }
+    });
   </script>
 </body>
 </html>
